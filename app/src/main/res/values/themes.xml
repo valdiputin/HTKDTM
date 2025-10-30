@@ -1,0 +1,22 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme -->
+    <style name="Base.Theme.KDTM" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Màu chủ đạo EduPath -->
+        <item name="colorPrimary">#F4A100</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+
+        <!-- Màu phụ -->
+        <item name="colorSecondary">#F4A100</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+
+        <!-- Màu nền chung -->
+        <item name="android:colorBackground">#FFFFFF</item>
+
+        <!-- Tắt action bar -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.KDTM" parent="Base.Theme.KDTM" />
+</resources>

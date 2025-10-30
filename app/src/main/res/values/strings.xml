@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">KDTM</string>
+    <string name="terms_and_policy">By creating an account, you agree to
+    <font color="#FFB300">EduPath\'s Terms &amp; Conditions</font>
+    and <font color="#FFB300">Privacy Policy</font>
+</string>
+</resources>

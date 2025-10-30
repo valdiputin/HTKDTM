@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Màu chủ đạo -->
+    <color name="orange_primary">#F4A100</color>
+    <color name="orange_dark">#D98F00</color>
+
+    <!-- Màu văn bản -->
+    <color name="text_primary">#1A1A1A</color>
+    <color name="text_secondary">#777777</color>
+    <color name="text_white">#FFFFFF</color>
+
+    <!-- Màu viền, nền -->
+    <color name="gray">#999999</color>
+    <color name="gray_light">#DDDDDD</color>
+    <color name="background_light">#FFFFFF</color>
+    <color name="light_gray">#DDDDDD</color>
+    <color name="black_text">#333333</color>
+    <color name="bottom_nav_selected">#FF9800</color>
+    <color name="bottom_nav_unselected">#AAAAAA</color>
+</resources>
