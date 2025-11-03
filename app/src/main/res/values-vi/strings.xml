@@ -106,6 +106,12 @@
     <string name="progress_5_of_10">5/10</string>
     <string name="progress_50_percent">50%</string>
 
+    <string name="ai_tutor_title">Gia sư AI (Câu hỏi Thực hành)</string>
+    <string name="ai_tutor_context_placeholder">Xem trước Nội dung bài học...</string>
+    <string name="create_mcq_button">Tạo Câu hỏi Trắc nghiệm</string>
+    <string name="create_open_ended_button">Tạo Câu hỏi Mở</string>
+    <string name="ai_tutor_result_placeholder">Các câu hỏi do AI tạo sẽ xuất hiện tại đây sau khi bạn nhấn nút.</string>
+
     <string-array name="filter_options">
         <item>Lọc</item>
         <item>Mới nhất</item>

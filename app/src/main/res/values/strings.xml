@@ -27,7 +27,7 @@
     <string name="edulearn">EduLearn</string>
     <string name="chu_de">Topic</string>
     <string name="ve_lop_hoc">About Class</string>
-    <string name="ui_ux_design_principle">UI/UX Design principle</string>
+    <string name="ui_ux_design_principle">UI/UX Design Principle</string>
     <string name="application_history">Application History in the World</string>
     <string name="lessons_duration">10 lessons (1 hour 25 min)</string>
     <string name="nhan_chung_chi">Get Certificate</string>
@@ -75,16 +75,16 @@
     <string name="start_journey_button">Start journey</string>
 
     <string name="course_ui_ux_title">Mastering UI/UX Design</string>
-    <string name="course_ui_ux_details">12 Class, 3 Level</string>
+    <string name="course_ui_ux_details">12 Classes, 3 Levels</string>
     <string name="course_html_title">Mastering HTML</string>
-    <string name="course_html_details">14 Class, 3 Level</string>
+    <string name="course_html_details">14 Classes, 3 Levels</string>
 
     <string name="freemium_classes">Freemium Classes</string>
     <string name="star_icon_description">Star rating</string>
     <string name="course_digital_marketing_title">Digital Marketing for beginners</string>
     <string name="course_free_label">Free</string>
     <string name="course_digital_marketing_rating">(1,125)</string>
-    <string name="course_english_freelancer_title">English for Freelancer: Interview &amp; work pr...</string>
+    <string name="course_english_freelancer_title">English for Freelancer: Interview &amp; Work...</string>
     <string name="course_english_freelancer_rating">(1,200)</string>
 
     <string name="popular_classes">Popular Classes</string>
@@ -105,6 +105,12 @@
     <string name="beginner_level">Beginner</string>
     <string name="progress_5_of_10">5/10</string>
     <string name="progress_50_percent">50%</string>
+
+    <string name="ai_tutor_title">AI Tutor (Practice Questions)</string>
+    <string name="ai_tutor_context_placeholder">Lesson Content Preview...</string>
+    <string name="create_mcq_button">Create Multiple Choice Questions</string>
+    <string name="create_open_ended_button">Create Open-ended Question</string>
+    <string name="ai_tutor_result_placeholder">The AI-generated questions will appear here after you click the button.</string>
 
     <string-array name="filter_options">
         <item>Filter</item>
