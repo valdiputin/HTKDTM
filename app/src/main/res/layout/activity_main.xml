@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/main"
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:background="#FFFFFF"
@@ -35,12 +36,12 @@
             app:layout_constraintTop_toTopOf="@id/logo"
             app:layout_constraintBottom_toBottomOf="@id/logo"/>
 
-        <TextView
+        <Button
             android:id="@+id/tvSignInHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Đăng Ký"
-            android:textColor="@color/orange_primary"
+            android:textColor="@color/text_white"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
