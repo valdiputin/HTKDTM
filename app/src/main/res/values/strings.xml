@@ -43,4 +43,24 @@
         <item>Mới nhất</item>
         <item>Phổ biến</item>
     </string-array>
+    <string-array name="education_levels">
+        <item>Lớp 10</item>
+        <item>Lớp 11</item>
+        <item>Lớp 12</item>
+        <item>Đại học năm 1</item>
+        <item>Đại học năm 2</item>
+        <item>Đại học năm 3</item>
+        <item>Đại học năm 4</item>
+    </string-array>
+
+    <string-array name="age_range">
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+    </string-array>
 </resources>
