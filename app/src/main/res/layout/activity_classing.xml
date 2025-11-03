@@ -81,6 +81,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
+                    android:minHeight="48dp"
                     android:entries="@array/filter_options" />
             </RelativeLayout>
 
@@ -124,6 +125,7 @@
 
                     <!-- Course Card 1 -->
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/course_card_1"
                         android:layout_width="220dp"
                         android:layout_height="wrap_content"
                         app:cardCornerRadius="16dp"
@@ -187,6 +189,7 @@
 
                     <!-- Course Card 2 -->
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/course_card_2"
                         android:layout_width="220dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -289,6 +292,7 @@
 
                     <!-- Course Card 3 -->
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/course_card_3"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         app:cardCornerRadius="16dp"
@@ -359,6 +363,7 @@
 
                     <!-- Course Card 4 -->
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/course_card_4"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -463,12 +468,13 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android.orientation="horizontal"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp">
 
                     <!-- Course Card 5 -->
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/course_card_5"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         app:cardCornerRadius="16dp"
@@ -539,6 +545,7 @@
 
                     <!-- Course Card 6 -->
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/course_card_6"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -648,6 +655,7 @@
 
                     <!-- Course Card 7 -->
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/course_card_7"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         app:cardCornerRadius="16dp"
@@ -718,6 +726,7 @@
 
                     <!-- Course Card 8 -->
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/course_card_8"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"

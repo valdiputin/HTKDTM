@@ -213,6 +213,17 @@
         </LinearLayout>
     </ScrollView>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_chat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_chat_bot"
+        app:backgroundTint="@color/orange_primary"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/chat_with_ai_tutor" />
+
     <LinearLayout
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
@@ -224,6 +235,7 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
+            android:id="@+id/nav_home"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -234,18 +246,19 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_home"
-                app:tint="#999999"/>
+                app:tint="@color/bottom_nav_unselected"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Trang chủ"
                 android:textSize="12sp"
-                android:textColor="#999999"/>
+                android:textColor="@color/bottom_nav_unselected"/>
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/nav_events"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -255,19 +268,20 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_su_kien"
-                app:tint="#999999"/>
+                android:src="@drawable/ic_events"
+                app:tint="@color/bottom_nav_unselected"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sự kiện"
                 android:textSize="12sp"
-                android:textColor="#999999"/>
+                android:textColor="@color/bottom_nav_unselected"/>
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/nav_class"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -277,19 +291,20 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_lop"
-                app:tint="#F4A100"/>
+                android:src="@drawable/ic_class"
+                app:tint="@color/bottom_nav_selected"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Lớp"
                 android:textSize="12sp"
-                android:textColor="#F4A100"/>
+                android:textColor="@color/bottom_nav_selected"/>
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/nav_profile"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -299,15 +314,15 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_ca_nhan"
-                app:tint="#999999"/>
+                android:src="@drawable/ic_profile"
+                app:tint="@color/bottom_nav_unselected"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cá nhân"
                 android:textSize="12sp"
-                android:textColor="#999999"/>
+                android:textColor="@color/bottom_nav_unselected"/>
 
         </LinearLayout>
 

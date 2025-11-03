@@ -1,0 +1,13 @@
+package vn.edu.tlu.cse.ht1.lequocthinh.kdtm;
+
+import android.os.Bundle;
+import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.R;
+
+public class ClassdanghocActivity extends BaseActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_classdanghoc);
+        setupBottomNavigation(R.id.nav_class);
+    }
+}
