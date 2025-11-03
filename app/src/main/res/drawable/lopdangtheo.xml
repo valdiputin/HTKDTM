@@ -1,0 +1,12 @@
+<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Button container">
+<rect width="80" height="80" rx="10" fill="#FEF5E5"/>
+<g id="Button container_2">
+<g id="Button">
+<path id="Vector" d="M40 51.6667L51.6667 40L56.6667 45L45 56.6667L40 51.6667Z" stroke="#F9AD2B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M23.3333 23.3333L35.9766 35.9766M49.9999 41.6666L47.4999 29.1666L23.3333 23.3333L29.1666 47.4999L41.6666 49.9999L49.9999 41.6666Z" stroke="#F9AD2B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_3" d="M38.3333 41.6667C40.1743 41.6667 41.6667 40.1743 41.6667 38.3333C41.6667 36.4924 40.1743 35 38.3333 35C36.4924 35 35 36.4924 35 38.3333C35 40.1743 36.4924 41.6667 38.3333 41.6667Z" stroke="#F9AD2B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+</g>
+</svg>

@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".LanguageActivity">
+
+    <!-- Header -->
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/ic_back"
+            android:contentDescription="@string/app_name" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/edupath"
+            android:src="@drawable/ic_edupath_logo" />
+
+        <TextView
+            android:id="@+id/tv_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/edupath"
+            android:textColor="#555555"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/choose_language"
+        android:textColor="#222222"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header" />
+
+    <!-- Danh sách ngôn ngữ -->
+    <ScrollView
+        android:id="@+id/scroll_languages"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_buttons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title">
+
+        <LinearLayout
+            android:id="@+id/language_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_vietnamese"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@drawable/bg_language_item"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="20dp"
+                    android:contentDescription="@string/vietnamese"
+                    android:src="@drawable/flag_vn" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:text="@string/vietnamese"
+                    android:textColor="#444444"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/check_vietnamese"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/ic_check"
+                    android:visibility="visible"
+                    app:tint="#F0A733" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_english"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="20dp"
+                    android:contentDescription="@string/english"
+                    android:src="@drawable/flag_en" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:text="@string/english"
+                    android:textColor="#444444"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/check_english"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/ic_check"
+                    android:visibility="gone"
+                    app:tint="#F0A733" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_japanese"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="20dp"
+                    android:contentDescription="@string/japanese"
+                    android:src="@drawable/flag_jp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/japanese"
+                    android:textSize="16sp"
+                    android:textColor="#444444" />
+
+                <ImageView
+                    android:id="@+id/check_japanese"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_check"
+                    app:tint="#F0A733"
+                    android:visibility="gone"
+                    android:contentDescription="@string/app_name"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_portuguese"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="20dp"
+                    android:contentDescription="@string/portuguese"
+                    android:src="@drawable/flag_pt" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/portuguese"
+                    android:textSize="16sp"
+                    android:textColor="#444444" />
+
+                <ImageView
+                    android:id="@+id/check_portuguese"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_check"
+                    app:tint="#F0A733"
+                    android:visibility="gone"
+                    android:contentDescription="@string/app_name"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_china"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="20dp"
+                    android:contentDescription="@string/china"
+                    android:src="@drawable/flag_cn" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/china"
+                    android:textSize="16sp"
+                    android:textColor="#444444" />
+
+                <ImageView
+                    android:id="@+id/check_china"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_check"
+                    app:tint="#F0A733"
+                    android:visibility="gone"
+                    android:contentDescription="@string/app_name"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_korea"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="20dp"
+                    android:contentDescription="@string/korea"
+                    android:src="@drawable/flag_kr" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/korea"
+                    android:textSize="16sp"
+                    android:textColor="#444444" />
+
+                <ImageView
+                    android:id="@+id/check_korea"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_check"
+                    app:tint="#F0A733"
+                    android:visibility="gone"
+                    android:contentDescription="@string/app_name"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_nicaragua"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="20dp"
+                    android:contentDescription="@string/nicaragua"
+                    android:src="@drawable/flag_ni" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/nicaragua"
+                    android:textSize="16sp"
+                    android:textColor="#444444" />
+
+                <ImageView
+                    android:id="@+id/check_nicaragua"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_check"
+                    app:tint="#F0A733"
+                    android:visibility="gone"
+                    android:contentDescription="@string/app_name"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_russia"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="20dp"
+                    android:contentDescription="@string/russia"
+                    android:src="@drawable/flag_ru" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/russia"
+                    android:textSize="16sp"
+                    android:textColor="#444444" />
+
+                <ImageView
+                    android:id="@+id/check_russia"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_check"
+                    app:tint="#F0A733"
+                    android:visibility="gone"
+                    android:contentDescription="@string/app_name"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_french"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="20dp"
+                    android:contentDescription="@string/french"
+                    android:src="@drawable/flag_fr" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/french"
+                    android:textSize="16sp"
+                    android:textColor="#444444" />
+
+                <ImageView
+                    android:id="@+id/check_french"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_check"
+                    app:tint="#F0A733"
+                    android:visibility="gone"
+                    android:contentDescription="@string/app_name"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Nút Reset / Lưu -->
+    <LinearLayout
+        android:id="@+id/bottom_buttons"
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btn_reset"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="#FFF3D4"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/reset"
+            android:textColor="#F0A733" />
+
+        <Button
+            android:id="@+id/btn_save"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:backgroundTint="#F0A733"
+            android:elevation="4dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/save"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
