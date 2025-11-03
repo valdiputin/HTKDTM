@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.R;
-
+import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.LanguageActivity;
 public class HomeActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
