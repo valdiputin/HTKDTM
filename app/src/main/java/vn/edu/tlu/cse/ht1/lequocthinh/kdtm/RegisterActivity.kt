@@ -4,81 +4,75 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.service.FirebaseService
 
-class MainActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
     
+    private lateinit var edtName: TextInputEditText
     private lateinit var edtEmail: TextInputEditText
     private lateinit var edtPassword: TextInputEditText
-    private lateinit var btnLogin: Button
+    private lateinit var btnRegister: Button
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+        setContentView(R.layout.activity_register)
         
         setupViews()
-        
-        // Check if user is already logged in
-        if (FirebaseService.getCurrentUser() != null) {
-            navigateToHome()
-        }
     }
     
     private fun setupViews() {
+        edtName = findViewById(R.id.edtName)
         edtEmail = findViewById(R.id.edtEmail)
         edtPassword = findViewById(R.id.edtPassword)
-        btnLogin = findViewById(R.id.btnLogin)
+        btnRegister = findViewById(R.id.btnRegister)
         
-        val btnRegister = findViewById<Button>(R.id.btnRegister)
-        btnRegister.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
+        findViewById<Button>(R.id.tvLoginNav).setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            finish()
         }
         
-        btnLogin.setOnClickListener {
-            login()
+        btnRegister.setOnClickListener {
+            register()
         }
-    } // Kết thúc hàm onCreate
+    }
     
-    private fun login() {
+    private fun register() {
+        val name = edtName.text?.toString()?.trim() ?: ""
         val email = edtEmail.text?.toString()?.trim() ?: ""
         val password = edtPassword.text?.toString() ?: ""
+        
+        if (name.isEmpty()) {
+            Toast.makeText(this, "Vui lòng nhập họ tên", Toast.LENGTH_SHORT).show()
+            return
+        }
         
         if (email.isEmpty()) {
             Toast.makeText(this, "Vui lòng nhập email", Toast.LENGTH_SHORT).show()
             return
         }
         
-        if (password.isEmpty()) {
-            Toast.makeText(this, "Vui lòng nhập mật khẩu", Toast.LENGTH_SHORT).show()
+        if (password.isEmpty() || password.length < 6) {
+            Toast.makeText(this, "Mật khẩu phải có ít nhất 6 ký tự", Toast.LENGTH_SHORT).show()
             return
         }
         
-        btnLogin.isEnabled = false
+        btnRegister.isEnabled = false
         
         CoroutineScope(Dispatchers.Main).launch {
-            val result = FirebaseService.login(email, password)
+            val result = FirebaseService.register(email, password, name)
             
             result.onSuccess {
-                Toast.makeText(this@MainActivity, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@RegisterActivity, "Đăng ký thành công!", Toast.LENGTH_SHORT).show()
                 navigateToHome()
             }.onFailure { exception ->
-                Toast.makeText(this@MainActivity, "Đăng nhập thất bại: ${exception.message}", Toast.LENGTH_LONG).show()
-                btnLogin.isEnabled = true
+                Toast.makeText(this@RegisterActivity, "Đăng ký thất bại: ${exception.message}", Toast.LENGTH_LONG).show()
+                btnRegister.isEnabled = true
             }
         }
     }
@@ -89,3 +83,4 @@ class MainActivity : AppCompatActivity() {
         finish()
     }
 }
+
