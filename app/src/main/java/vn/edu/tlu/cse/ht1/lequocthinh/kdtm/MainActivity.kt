@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val btnRegister = findViewById<Button>(R.id.btnRegister)
+        val btnRegister = findViewById<Button>(R.id.tvSignInHeader)
         btnRegister.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
