@@ -151,7 +151,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Lớp đang học"
+                        android:text="Các lớp học"
                         android:textSize="12sp" />
                 </LinearLayout>
 
@@ -176,7 +176,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Lập Trình Viên"
+                        android:text="Mở rộng"
                         android:textSize="12sp" />
                 </LinearLayout>
 
