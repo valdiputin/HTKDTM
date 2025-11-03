@@ -53,9 +53,6 @@ dependencies {
     implementation(libs.firebase.storage)
     implementation(libs.firebase.database)
     
-    // YouTube Player
-    implementation(libs.youtube.player)
-    
     // Networking
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)

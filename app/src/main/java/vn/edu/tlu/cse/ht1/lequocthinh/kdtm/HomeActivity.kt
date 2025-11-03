@@ -152,8 +152,11 @@ class HomeActivity : AppCompatActivity() {
     }
     
     private fun setupBottomNavigation() {
-        // Bottom navigation will be handled by layout's LinearLayouts
-        // They should have onClick handlers if needed
+        // Profile button click
+        findViewById<android.widget.LinearLayout>(R.id.profileButton)?.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
 

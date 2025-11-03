@@ -33,6 +33,8 @@ class CourseDetailActivity : AppCompatActivity() {
 
     private var course: Course? = null
     private var courseId: String = ""
+    private var lastClickedLessonId: String = "" // Track last clicked lesson
+    private var isAppReturnedFromYouTube: Boolean = false // Track if app returned from YouTube
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -119,27 +121,27 @@ class CourseDetailActivity : AppCompatActivity() {
 
         // Check completed lessons for current user
         val currentUser = FirebaseService.getCurrentUser()
-        val completedLessons = if (currentUser != null) {
-            CoroutineScope(Dispatchers.IO).launch {
-                val user = FirebaseService.getUserById(currentUser.uid)
-                user?.studyHistory?.map { it.lessonId } ?: emptyList()
-            }
-        } else {
-            emptyList()
-        }
-
-        // Mark lessons as completed
-        val lessonsWithStatus = lessons.map { lesson ->
-            lesson.copy(isCompleted = completedLessons.contains(lesson.id))
-        }
-
-        lessonsRecyclerView.adapter = LessonAdapter(lessonsWithStatus) { lesson ->
-            openYouTubeVideo(lesson)
-            // Mark lesson as completed
-            currentUser?.let { user ->
-                CoroutineScope(Dispatchers.IO).launch {
-                    FirebaseService.markLessonCompleted(user.uid, courseId, lesson.id)
+        
+        CoroutineScope(Dispatchers.Main).launch {
+            val completedLessons = if (currentUser != null) {
+                withContext(Dispatchers.IO) {
+                    val user = FirebaseService.getUserById(currentUser.uid)
+                    user?.studyHistory?.map { it.lessonId } ?: emptyList()
                 }
+            } else {
+                emptyList()
+            }
+
+            // Mark lessons as completed
+            val lessonsWithStatus = lessons.map { lesson ->
+                lesson.copy(isCompleted = completedLessons.contains(lesson.id))
+            }
+
+            lessonsRecyclerView.adapter = LessonAdapter(lessonsWithStatus) { lesson ->
+                // Save lesson ID when clicked (don't mark as completed yet)
+                lastClickedLessonId = lesson.id
+                openYouTubeVideo(lesson)
+                // Note: Lesson will be marked as completed when user returns to app
             }
         }
     }
@@ -164,6 +166,37 @@ class CourseDetailActivity : AppCompatActivity() {
             // Fallback to web browser
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=$videoId"))
             startActivity(intent)
+        }
+    }
+    
+    override fun onResume() {
+        super.onResume()
+        // When user returns from YouTube, mark lesson as completed
+        if (lastClickedLessonId.isNotEmpty() && courseId.isNotEmpty()) {
+            val currentUser = FirebaseService.getCurrentUser()
+            currentUser?.let { firebaseUser ->
+                // Check if lesson is already completed
+                CoroutineScope(Dispatchers.Main).launch {
+                    val user = withContext(Dispatchers.IO) {
+                        FirebaseService.getUserById(firebaseUser.uid)
+                    }
+                    val isAlreadyCompleted = user?.studyHistory?.any { 
+                        it.lessonId == lastClickedLessonId 
+                    } ?: false
+                    
+                    // Only mark as completed if not already completed
+                    if (!isAlreadyCompleted) {
+                        withContext(Dispatchers.IO) {
+                            FirebaseService.markLessonCompleted(firebaseUser.uid, courseId, lastClickedLessonId)
+                        }
+                        // Reload lessons to update UI
+                        course?.let {
+                            displayLessons(it.lessons)
+                        }
+                    }
+                    lastClickedLessonId = "" // Reset
+                }
+            }
         }
     }
 }

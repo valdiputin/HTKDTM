@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         edtPassword = findViewById(R.id.edtPassword)
         btnLogin = findViewById(R.id.btnLogin)
         
-        val btnRegister = findViewById<Button>(R.id.btnRegister)
+        val btnRegister = findViewById<Button>(R.id.tvSignInHeader)
         btnRegister.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)

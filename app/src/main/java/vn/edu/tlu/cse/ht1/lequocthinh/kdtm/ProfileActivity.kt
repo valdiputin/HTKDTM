@@ -3,6 +3,7 @@ package vn.edu.tlu.cse.ht1.lequocthinh.kdtm
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -38,9 +39,9 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_profile)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.profile_image)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            // Handle window insets if needed
             insets
         }
         
@@ -67,6 +68,13 @@ class ProfileActivity : AppCompatActivity() {
         // Logout button
         findViewById<Button>(R.id.btnLogout).setOnClickListener {
             logout()
+        }
+        
+        // Home button (bottom navigation)
+        findViewById<android.widget.LinearLayout>(R.id.homeButton)?.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
     
