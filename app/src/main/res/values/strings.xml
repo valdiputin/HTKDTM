@@ -1,9 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">KDTM</string>
     <string name="terms_and_policy">By creating an account, you agree to
     <font color="#FFB300">EduPath\'s Terms &amp; Conditions</font>
     and <font color="#FFB300">Privacy Policy</font>
-</string>
+    </string>
     <string name="edupath">EduPath</string>
     <string name="choose_language">Choose your language</string>
     <string name="vietnamese">Vietnamese</string>
@@ -38,11 +39,25 @@
     <string name="bai_tap">Bài tập</string>
     <string name="course_image_description">Course Image</string>
     <string name="lesson_status_icon">Lesson Status Icon</string>
+    <string name="profile_title">Cá nhân</string>
+    <string name="profile_name">Phạm Thị Ngọc</string>
+    <string name="profile_address">175 Tây Sơn – Đống Đa – Hà Nội</string>
+    <string name="profile_phone">458-419-7189</string>
+    <string name="edit_information">Chỉnh sửa thông tin</string>
+    <string name="email_address">Email Address</string>
+    <string name="password">Password</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="logout">Đăng Xuất</string>
+    <string name="luu">Lưu</string>
+    <string name="chat_with_ai_tutor">Chat with AI Tutor</string>
+
     <string-array name="filter_options">
         <item>Lọc</item>
         <item>Mới nhất</item>
         <item>Phổ biến</item>
     </string-array>
+
     <string-array name="education_levels">
         <item>Lớp 10</item>
         <item>Lớp 11</item>
@@ -63,4 +78,5 @@
         <item>21</item>
         <item>22</item>
     </string-array>
+
 </resources>
