@@ -7,17 +7,17 @@
     android:background="#FFFFFF"
     tools:context=".HomeActivity">
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-            <ScrollView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="none"
@@ -30,7 +30,6 @@
             android:orientation="vertical"
             android:paddingBottom="16dp">
 
-            <!-- Header -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -43,20 +42,21 @@
                     android:layout_height="40dp"
                     android:src="@drawable/ic_edupath_logo"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="@string/edupath_logo_description" />
 
                 <TextView
                     android:id="@+id/app_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="EduPath"
+                    android:text="@string/edupath"
                     android:textColor="#FFFFFF"
                     android:textSize="22sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/logo"
-                    app:layout_constraintTop_toTopOf="@+id/logo"
-                    app:layout_constraintBottom_toBottomOf="@+id/logo" />
+                    app:layout_constraintStart_toEndOf="@id/logo"
+                    app:layout_constraintTop_toTopOf="@id/logo"
+                    app:layout_constraintBottom_toBottomOf="@id/logo" />
 
                 <ImageView
                     android:id="@+id/notifications"
@@ -66,24 +66,25 @@
                     android:src="@drawable/ic_notifications"
                     android:background="@drawable/notification_background"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/logo" />
+                    app:layout_constraintTop_toTopOf="@+id/logo"
+                    android:contentDescription="@string/notifications_description" />
 
                 <TextView
                     android:id="@+id/welcome_message"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Xin chào, Ngọc !"
+                    android:text="@string/welcome_message"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/logo" />
+                    app:layout_constraintTop_toBottomOf="@id/logo" />
 
                 <TextView
                     android:id="@+id/welcome_subtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Find the class or field you like here"
+                    android:text="@string/welcome_subtitle"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -97,37 +98,39 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:padding="12dp"
-                    app:layout_constraintTop_toBottomOf="@+id/welcome_subtitle">
+                    app:layout_constraintTop_toBottomOf="@id/welcome_subtitle">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_search" />
+                        android:src="@drawable/ic_search"
+                        android:contentDescription="@string/search_icon_description" />
 
                     <EditText
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@null"
-                        android:hint="Tìm lớp"
+                        android:hint="@string/search_hint"
                         android:paddingStart="8dp"
                         android:paddingEnd="8dp"
                         android:textColor="#000000"
-                        android:textColorHint="#999999" />
+                        android:textColorHint="#999999"
+                        android:inputType="text" />
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_microphone" />
+                        android:src="@drawable/ic_microphone"
+                        android:contentDescription="@string/microphone_icon_description" />
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- Categories -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Khám phá danh mục"
+                android:text="@string/explore_categories"
                 android:textStyle="bold"
                 android:textSize="16sp"
                 android:textColor="#000000"
@@ -145,6 +148,7 @@
                 android:gravity="center_vertical">
 
                 <LinearLayout
+                    android:id="@+id/category_classes"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -156,12 +160,41 @@
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@drawable/ic_lop_dang_hoc" />
+                        android:src="@drawable/ic_lop_dang_hoc"
+                        android:contentDescription="@string/icon_classes_description" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Các lớp học"
+                        android:text="@string/category_classes"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="16dp"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:id="@+id/category_expand"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="#FFF9F0"
+                    android:padding="12dp">
+
+                    <ImageView
+
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_lap_trinh_vien"
+                        android:contentDescription="@string/icon_expand_description" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/category_expand"
                         android:textSize="12sp" />
                 </LinearLayout>
 
@@ -181,12 +214,13 @@
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@drawable/ic_lap_trinh_vien" />
+                        android:src="@drawable/ic_chung_chi"
+                        android:contentDescription="@string/icon_certificates_description" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Mở rộng"
+                        android:text="@string/category_certificates"
                         android:textSize="12sp" />
                 </LinearLayout>
 
@@ -195,6 +229,7 @@
                     android:layout_height="wrap_content" />
 
                 <LinearLayout
+                    android:id="@+id/category_language"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -206,43 +241,18 @@
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@drawable/ic_chung_chi" />
+                        android:src="@drawable/ic_ngon_ngu"
+                        android:contentDescription="@string/icon_language_description" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Chứng chỉ"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <Space
-                    android:layout_width="16dp"
-                    android:layout_height="wrap_content" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:background="#FFF9F0"
-                    android:padding="12dp">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/ic_ngon_ngu" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Ngôn ngữ"
+                        android:text="@string/category_language"
                         android:textSize="12sp" />
                 </LinearLayout>
 
             </LinearLayout>
 
-            <!-- Lộ Trình Bạn Có Thể Thích (Recommended) -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -257,7 +267,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Lộ Trình Bạn Có Thể Thích"
+                    android:text="@string/recommended_roadmap"
                     android:textColor="#000000"
                     android:textStyle="bold"
                     android:textSize="16sp" />
@@ -265,7 +275,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Xem Thêm"
+                    android:text="@string/see_more"
                     android:textColor="#F4A100"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -278,9 +288,10 @@
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:paddingTop="8dp"
-                android:paddingBottom="8dp" />
+                android:paddingBottom="8dp"
+                android:scrollbars="none"
+                android:layout_marginTop="8dp" />
 
-            <!-- Lớp Freemium -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -295,7 +306,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Lớp Freemium"
+                    android:text="@string/freemium_classes"
                     android:textColor="#000000"
                     android:textStyle="bold"
                     android:textSize="16sp" />
@@ -303,7 +314,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Xem Thêm"
+                    android:text="@string/see_more"
                     android:textColor="#F4A100"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -319,7 +330,6 @@
                 android:paddingBottom="8dp" />
 
 
-            <!-- Lớp Popular -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -371,6 +381,7 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
+            android:id="@+id/nav_home"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -392,6 +403,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/nav_events"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -413,6 +425,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/nav_class"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -434,7 +447,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/profileButton"
+            android:id="@+id/nav_profile"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

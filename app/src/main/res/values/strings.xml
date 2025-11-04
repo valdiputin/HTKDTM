@@ -1,9 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">KDTM</string>
     <string name="terms_and_policy">By creating an account, you agree to
     <font color="#FFB300">EduPath\'s Terms &amp; Conditions</font>
     and <font color="#FFB300">Privacy Policy</font>
-</string>
+    </string>
     <string name="edupath">EduPath</string>
     <string name="choose_language">Choose your language</string>
     <string name="vietnamese">Vietnamese</string>
@@ -17,40 +18,114 @@
     <string name="french">French</string>
     <string name="reset">Reset</string>
     <string name="save">Save</string>
-    <string name="cac_lop_hoc">Các Lớp Học</string>
-    <string name="lo_trinh">Lộ Trình</string>
-    <string name="xem_them">Xem Thêm</string>
-    <string name="lop_premium">Lớp Premium</string>
-    <string name="lop_popular">Lớp Popular</string>
-    <string name="lop_freemium">Lớp Freemium</string>
+    <string name="cac_lop_hoc">Classes</string>
+    <string name="lo_trinh">Roadmap</string>
+    <string name="xem_them">See More</string>
+    <string name="lop_premium">Premium Classes</string>
+    <string name="lop_popular">Popular Classes</string>
+    <string name="lop_freemium">Freemium Classes</string>
     <string name="edulearn">EduLearn</string>
-    <string name="chu_de">Chủ đề</string>
-    <string name="ve_lop_hoc">Về lớp học</string>
-    <string name="ui_ux_design_principle">UI/UX Design principle</string>
+    <string name="chu_de">Topic</string>
+    <string name="ve_lop_hoc">About Class</string>
+    <string name="ui_ux_design_principle">UI/UX Design Principle</string>
     <string name="application_history">Application History in the World</string>
     <string name="lessons_duration">10 lessons (1 hour 25 min)</string>
-    <string name="nhan_chung_chi">Nhận chứng chỉ</string>
-    <string name="bai_giang_1">Bài giảng 1</string>
-    <string name="bai_giang_6">Bài giảng 6</string>
-    <string name="bai_giang_7">Bài giảng 7</string>
-    <string name="chi_tiet">Chi tiết</string>
-    <string name="ly_thuyet">Lý thuyết</string>
-    <string name="bai_tap">Bài tập</string>
+    <string name="nhan_chung_chi">Get Certificate</string>
+    <string name="bai_giang_1">Lesson 1</string>
+    <string name="bai_giang_6">Lesson 6</string>
+    <string name="bai_giang_7">Lesson 7</string>
+    <string name="chi_tiet">Details</string>
+    <string name="ly_thuyet">Theory</string>
+    <string name="bai_tap">Exercise</string>
     <string name="course_image_description">Course Image</string>
     <string name="lesson_status_icon">Lesson Status Icon</string>
+    <string name="profile_title">Profile</string>
+    <string name="profile_name">Ngoc Pham</string>
+    <string name="profile_address">175 Tay Son – Dong Da – Ha Noi</string>
+    <string name="profile_phone">458-419-7189</string>
+    <string name="edit_information">Edit Information</string>
+    <string name="email_address">Email Address</string>
+    <string name="password">Password</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="logout">Logout</string>
+    <string name="luu">Save</string>
+    <string name="chat_with_ai_tutor">Chat with AI Tutor</string>
+
+    <string name="edupath_logo_description">EduPath Logo</string>
+    <string name="notifications_description">Notifications</string>
+    <string name="welcome_message">Hello, Ngoc!</string>
+    <string name="welcome_subtitle">Find the class or field you like here</string>
+    <string name="search_icon_description">Search icon</string>
+    <string name="search_hint">Search class</string>
+    <string name="microphone_icon_description">Microphone icon</string>
+
+    <string name="explore_categories">Explore Categories</string>
+    <string name="icon_classes_description">Classes icon</string>
+    <string name="category_classes">Classes</string>
+    <string name="icon_expand_description">Expand icon</string>
+    <string name="category_expand">Expand</string>
+    <string name="icon_certificates_description">Certificates icon</string>
+    <string name="category_certificates">Certificates</string>
+    <string name="icon_language_description">Language icon</string>
+    <string name="category_language">Language</string>
+
+    <string name="recommended_roadmap">Recommended Roadmap</string>
+    <string name="see_more">See More</string>
+    <string name="start_journey_button">Start journey</string>
+
+    <string name="course_ui_ux_title">Mastering UI/UX Design</string>
+    <string name="course_ui_ux_details">12 Classes, 3 Levels</string>
+    <string name="course_html_title">Mastering HTML</string>
+    <string name="course_html_details">14 Classes, 3 Levels</string>
+
+    <string name="freemium_classes">Freemium Classes</string>
+    <string name="star_icon_description">Star rating</string>
+    <string name="course_digital_marketing_title">Digital Marketing for beginners</string>
+    <string name="course_free_label">Free</string>
+    <string name="course_digital_marketing_rating">(1,125)</string>
+    <string name="course_english_freelancer_title">English for Freelancer: Interview &amp; Work...</string>
+    <string name="course_english_freelancer_rating">(1,200)</string>
+
+    <string name="popular_classes">Popular Classes</string>
+    <string name="course_copywriter_title">Become a Copywriter</string>
+    <string name="course_copywriter_price">Rp. 70,000</string>
+    <string name="course_copywriter_rating">(780)</string>
+
+    <string name="nav_home_icon_description">Home icon</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_events_icon_description">Events icon</string>
+    <string name="nav_events">Events</string>
+    <string name="nav_class_icon_description">Class icon</string>
+    <string name="nav_class">Class</string>
+    <string name="nav_profile_icon_description">Profile icon</string>
+    <string name="nav_profile">Profile</string>
+
+    <string name="my_classes_title">Your Classes</string>
+    <string name="beginner_level">Beginner</string>
+    <string name="progress_5_of_10">5/10</string>
+    <string name="progress_50_percent">50%</string>
+
+    <string name="ai_tutor_title">AI Tutor (Practice Questions)</string>
+    <string name="ai_tutor_context_placeholder">Lesson Content Preview...</string>
+    <string name="create_mcq_button">Create Multiple Choice Questions</string>
+    <string name="create_open_ended_button">Create Open-ended Question</string>
+    <string name="ai_tutor_result_placeholder">The AI-generated questions will appear here after you click the button.</string>
+
     <string-array name="filter_options">
-        <item>Lọc</item>
-        <item>Mới nhất</item>
-        <item>Phổ biến</item>
+        <item>Filter</item>
+        <item>Newest</item>
+        <item>Popular</item>
     </string-array>
+
     <string-array name="education_levels">
-        <item>Lớp 10</item>
-        <item>Lớp 11</item>
-        <item>Lớp 12</item>
-        <item>Đại học năm 1</item>
-        <item>Đại học năm 2</item>
-        <item>Đại học năm 3</item>
-        <item>Đại học năm 4</item>
+        <item>Grade 10</item>
+        <item>Grade 11</item>
+        <item>Grade 12</item>
+        <item>College Year 1</item>
+        <item>College Year 2</item>
+        <item>College Year 3</item>
+        <item>College Year 4</item>
     </string-array>
 
     <string-array name="age_range">

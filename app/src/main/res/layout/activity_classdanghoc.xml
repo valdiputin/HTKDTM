@@ -19,7 +19,6 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Header -->
             <LinearLayout
                 android:id="@+id/header"
                 android:layout_width="match_parent"
@@ -31,7 +30,7 @@
                     android:id="@+id/logo"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:contentDescription="@string/edupath"
+                    android:contentDescription="@string/edupath_logo_description"
                     android:src="@drawable/ic_edupath_logo" />
 
                 <TextView
@@ -44,16 +43,14 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <!-- Title -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lớp học của bạn"
+                android:text="@string/my_classes_title"
                 android:textColor="#000000"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
-            <!-- Course 1 -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,7 +58,6 @@
                 android:text="Mastering UI/UX Design"
                 android:textColor="#000000"
                 android:textSize="18sp" />
-
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -80,7 +76,8 @@
                         android:layout_width="100dp"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                        tools:srcCompat="@tools:sample/backgrounds/scenic"
+                        android:contentDescription="@string/course_image_description" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -92,7 +89,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Application History in the World"
+                            android:text="@string/application_history"
                             android:textColor="#000000"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -101,7 +98,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="Beginner"
+                            android:text="@string/beginner_level"
                             android:textColor="#666666"
                             android:textSize="14sp" />
 
@@ -109,7 +106,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="5/10"
+                            android:text="@string/progress_5_of_10"
                             android:textColor="#F0A733"
                             android:textSize="12sp" />
 
@@ -125,13 +122,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
-                            android:text="50%"/>
+                            android:text="@string/progress_50_percent"/>
 
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Course 2 -->
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -158,7 +155,8 @@
                         android:layout_width="100dp"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                        tools:srcCompat="@tools:sample/backgrounds/scenic"
+                        android:contentDescription="@string/course_image_description" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -170,7 +168,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Application History in the World"
+                            android:text="@string/application_history"
                             android:textColor="#000000"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -179,7 +177,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="Beginner"
+                            android:text="@string/beginner_level"
                             android:textColor="#666666"
                             android:textSize="14sp" />
 
@@ -187,7 +185,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="5/10"
+                            android:text="@string/progress_5_of_10"
                             android:textColor="#F0A733"
                             android:textSize="12sp" />
 
@@ -204,7 +202,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
-                            android:text="50%"/>
+                            android:text="@string/progress_50_percent"/>
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -223,88 +221,96 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
+            android:id="@+id/nav_home"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:background="?android:attr/selectableItemBackgroundBorderless">
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_home"
-                app:tint="#999999"/>
+                android:contentDescription="@string/nav_home_icon_description"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Trang chủ"
+                android:text="@string/nav_home"
                 android:textSize="12sp"
                 android:textColor="#999999"/>
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/nav_events"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:background="?android:attr/selectableItemBackgroundBorderless">
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_su_kien"
-                app:tint="#999999"/>
+                android:contentDescription="@string/nav_events_icon_description" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sự kiện"
+                android:text="@string/nav_events"
                 android:textSize="12sp"
                 android:textColor="#999999"/>
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/nav_class"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:background="?android:attr/selectableItemBackgroundBorderless">
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_lop"
-                app:tint="#F4A100"/>
+                android:contentDescription="@string/nav_class_icon_description"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lớp"
+                android:text="@string/nav_class"
                 android:textSize="12sp"
                 android:textColor="#F4A100"/>
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/nav_profile"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:background="?android:attr/selectableItemBackgroundBorderless">
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_ca_nhan"
-                app:tint="#999999"/>
+                android:contentDescription="@string/nav_profile_icon_description"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cá nhân"
+                android:text="@string/nav_profile"
                 android:textSize="12sp"
                 android:textColor="#999999"/>
 

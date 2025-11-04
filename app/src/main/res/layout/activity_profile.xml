@@ -24,7 +24,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cá nhân"
+                android:text="@string/profile_title"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:textColor="#000000"
@@ -43,7 +43,7 @@
                 android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Người dùng"
+                android:text="@string/profile_name"
                 android:textColor="#000000"
                 android:textStyle="bold"
                 android:textSize="18sp"
@@ -53,7 +53,7 @@
                 android:id="@+id/tvEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="email@example.com"
+                android:text="@string/profile_address"
                 android:textColor="#777777"
                 android:textSize="14sp"
                 android:layout_marginTop="4dp" />
@@ -62,13 +62,12 @@
                 android:id="@+id/tvPhone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Chưa cập nhật"
+                android:text="@string/profile_phone"
                 android:textColor="#777777"
                 android:textSize="14sp"
                 android:layout_marginTop="2dp"
                 android:visibility="gone" />
 
-            <!-- Dashboard theo dõi tiến độ -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -88,7 +87,6 @@
                     android:textSize="18sp"
                     android:layout_marginBottom="16dp" />
 
-                <!-- Điểm số -->
                 <TextView
                     android:id="@+id/tvScore"
                     android:layout_width="match_parent"
@@ -98,7 +96,6 @@
                     android:textSize="14sp"
                     android:layout_marginBottom="12dp" />
 
-                <!-- Phần trăm hoàn thành -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -140,7 +137,6 @@
                         android:progressTint="#F4A100" />
                 </LinearLayout>
 
-                <!-- Thời gian học -->
                 <TextView
                     android:id="@+id/tvStudyTime"
                     android:layout_width="match_parent"
@@ -150,7 +146,6 @@
                     android:textSize="14sp"
                     android:layout_marginBottom="12dp" />
 
-                <!-- Thành tích -->
                 <TextView
                     android:id="@+id/tvAchievements"
                     android:layout_width="match_parent"
@@ -160,7 +155,6 @@
                     android:textSize="14sp"
                     android:layout_marginBottom="8dp" />
 
-                <!-- Đã đăng ký -->
                 <TextView
                     android:id="@+id/tvEnrolledCourses"
                     android:layout_width="match_parent"
@@ -190,7 +184,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Chỉnh sửa thông tin"
+                        android:text="@string/edit_information"
                         android:textColor="#000000"
                         android:textStyle="bold"
                         android:textSize="16sp" />
@@ -201,68 +195,81 @@
                         android:src="@drawable/ic_edit" />
                 </LinearLayout>
 
-                <EditText
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Email Address"
-                    android:background="@android:color/transparent"
-                    android:padding="8dp"
                     android:layout_marginTop="12dp"
-                    android:layout_marginBottom="8dp" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#9E9C60"/>
+                    android:hint="@string/email_address">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <EditText
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Password"
-                    android:inputType="textPassword"
-                    android:background="@android:color/transparent"
-                    android:padding="8dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#E0E0E0"/>
+                    app:endIconMode="password_toggle"
+                    android:hint="@string/password">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:inputType="textPassword"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <EditText
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="First Name"
-                    android:background="@android:color/transparent"
-                    android:padding="8dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#E0E0E0"/>
+                    android:hint="@string/first_name">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <EditText
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Last Name"
-                    android:background="@android:color/transparent"
-                    android:padding="8dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp" />
+                    android:hint="@string/last_name">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
             </LinearLayout>
 
             <ProgressBar
-                android:id="@+id/progressBar"
+                android:id="@+id/profileLoading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
                 android:layout_marginBottom="16dp" />
 
             <Button
+                android:id="@+id/btnLuu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/luu"
+                android:backgroundTint="#FFC107"
+                android:textColor="#FFFFFF"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <Button
                 android:id="@+id/btnLogout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Đăng Xuất"
+                android:text="@string/logout"
                 android:backgroundTint="#E86C48"
                 android:textColor="#FFFFFF"
                 android:textAllCaps="false"
@@ -282,7 +289,7 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
-            android:id="@+id/homeButton"
+            android:id="@+id/nav_home"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -296,18 +303,19 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_home"
-                app:tint="#999999"/>
+                app:tint="@color/bottom_nav_unselected"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Trang chủ"
                 android:textSize="12sp"
-                android:textColor="#999999"/>
+                android:textColor="@color/bottom_nav_unselected"/>
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/nav_events"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -317,19 +325,20 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_su_kien"
-                app:tint="#999999"/>
+                android:src="@drawable/ic_events"
+                app:tint="@color/bottom_nav_unselected"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sự kiện"
                 android:textSize="12sp"
-                android:textColor="#999999"/>
+                android:textColor="@color/bottom_nav_unselected"/>
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/nav_class"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -339,19 +348,20 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_lop"
-                app:tint="#999999"/>
+                android:src="@drawable/ic_class"
+                app:tint="@color/bottom_nav_unselected"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Lớp"
                 android:textSize="12sp"
-                android:textColor="#999999"/>
+                android:textColor="@color/bottom_nav_unselected"/>
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/nav_profile"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -361,15 +371,15 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_ca_nhan"
-                app:tint="#F4A100"/>
+                android:src="@drawable/ic_profile"
+                app:tint="@color/bottom_nav_selected"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cá nhân"
                 android:textSize="12sp"
-                android:textColor="#F4A100"/>
+                android:textColor="@color/bottom_nav_selected"/>
 
         </LinearLayout>
 
