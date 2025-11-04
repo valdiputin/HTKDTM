@@ -6,14 +6,10 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Locale;
-
-// LƯU Ý: Nếu HomeActivity, ClassdanghocActivity, ProfileActivity không extend BaseActivity,
-// bạn phải thêm các hàm loadLocale/setLocale và gọi loadLocale() vào onCreate của chúng.
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -25,13 +21,19 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
     }
 
+    // Hàm thiết lập Bottom Navigation
     protected void setupBottomNavigation(final int currentNavItemId) {
+
+        // 1. Ánh xạ các nút ở Bottom Navigation
         LinearLayout homeNav = findViewById(R.id.nav_home);
+        // THÊM: Nút Chat Box (sử dụng ID R.id.nav_events)
+        LinearLayout chatBoxNav = findViewById(R.id.nav_events);
         LinearLayout classNav = findViewById(R.id.nav_class);
         LinearLayout profileNav = findViewById(R.id.nav_profile);
-        LinearLayout eventsNav = findViewById(R.id.nav_events);
 
-        // Đảm bảo không bị NullPointerException (đã sửa ở các file XML trước đó)
+        // 2. Thiết lập Listeners cho từng nút
+
+        // Xử lý nút TRANG CHỦ
         if (homeNav != null) {
             homeNav.setOnClickListener(v -> {
                 if (currentNavItemId != R.id.nav_home) {
@@ -40,6 +42,18 @@ public class BaseActivity extends AppCompatActivity {
             });
         }
 
+        // Xử lý nút CHAT BOX
+        if (chatBoxNav != null) {
+            chatBoxNav.setOnClickListener(v -> {
+                // Kiểm tra Activity hiện tại có phải là Chat Box không (sử dụng ID nav_events)
+                if (currentNavItemId != R.id.nav_events) {
+                    // KHỞI TẠO INTENT ĐẾN CHATBOXACTIVITY
+                    startActivity(new Intent(this, ChatBoxActivity.class));
+                }
+            });
+        }
+
+        // Xử lý nút LỚP HỌC
         if (classNav != null) {
             classNav.setOnClickListener(v -> {
                 if (currentNavItemId != R.id.nav_class) {
@@ -48,6 +62,7 @@ public class BaseActivity extends AppCompatActivity {
             });
         }
 
+        // Xử lý nút CÁ NHÂN (PROFILE)
         if (profileNav != null) {
             profileNav.setOnClickListener(v -> {
                 if (currentNavItemId != R.id.nav_profile) {
@@ -56,10 +71,10 @@ public class BaseActivity extends AppCompatActivity {
             });
         }
 
-        // Code eventsNav bị comment
+        // KHÔNG CẦN XỬ LÝ eventsNav BỊ COMMENT VÌ NÓ ĐÃ ĐƯỢC DÙNG LÀM chatBoxNav
     }
 
-    // --- CÁC HÀM XỬ LÝ NGÔN NGỮ (SẼ ĐƯỢC KẾ THỪA BỞI TẤT CẢ ACTIVITY) ---
+    // --- CÁC HÀM XỬ LÝ NGÔN NGỮ ---
 
     /**
      * Tải ngôn ngữ đã lưu từ SharedPreferences.
