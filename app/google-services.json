@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "171088552541",
-    "project_id": "du-lich-asia-journey",
-    "storage_bucket": "du-lich-asia-journey.firebasestorage.app"
+    "project_number": "1014852112031",
+    "project_id": "edupath-5b91d",
+    "storage_bucket": "edupath-5b91d.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:171088552541:android:4015c2eca3e6ed2321a3b4",
+        "mobilesdk_app_id": "1:1014852112031:android:0517f495210a6e1edb5caa",
         "android_client_info": {
           "package_name": "vn.edu.tlu.cse.ht1.lequocthinh.kdtm"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyB9OQRua78FXTZUjiC3GkxWjfKbfj-Aw78"
+          "current_key": "AIzaSyDEmonp1LzVkGXv14pwVIF4wbk_WC_zHuw"
         }
       ],
       "services": {
