@@ -8,9 +8,8 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.HashMap;
@@ -18,7 +17,7 @@ import java.util.Locale;
 import java.util.Map;
 
 // <--- DÒNG NÀY ĐỂ SỬA LỖI 2 (Cannot resolve symbol 'HomeActivity')
-import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.HomeActivity;
+
 
 public class LanguageActivity extends AppCompatActivity {
 

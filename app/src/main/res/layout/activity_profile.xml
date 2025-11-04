@@ -34,7 +34,7 @@
                 android:id="@+id/profile_image"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android.src="@drawable/avatar"
+                android:src="@drawable/avatar"
                 android:layout_marginTop="16dp"
                 app:civ_border_width="2dp"
                 app:civ_border_color="#FFFFFF"/>
@@ -43,7 +43,6 @@
                 android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Người dùng"
                 android:text="@string/profile_name"
                 android:textColor="#000000"
                 android:textStyle="bold"
@@ -54,7 +53,6 @@
                 android:id="@+id/tvEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="email@example.com"
                 android:text="@string/profile_address"
                 android:textColor="#777777"
                 android:textSize="14sp"
@@ -65,13 +63,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/profile_phone"
-                android:text="Chưa cập nhật"
                 android:textColor="#777777"
                 android:textSize="14sp"
                 android:layout_marginTop="2dp"
                 android:visibility="gone" />
 
-            <!-- Dashboard theo dõi tiến độ -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -91,7 +87,6 @@
                     android:textSize="18sp"
                     android:layout_marginBottom="16dp" />
 
-                <!-- Điểm số -->
                 <TextView
                     android:id="@+id/tvScore"
                     android:layout_width="match_parent"
@@ -101,7 +96,6 @@
                     android:textSize="14sp"
                     android:layout_marginBottom="12dp" />
 
-                <!-- Phần trăm hoàn thành -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -143,7 +137,6 @@
                         android:progressTint="#F4A100" />
                 </LinearLayout>
 
-                <!-- Thời gian học -->
                 <TextView
                     android:id="@+id/tvStudyTime"
                     android:layout_width="match_parent"
@@ -153,7 +146,6 @@
                     android:textSize="14sp"
                     android:layout_marginBottom="12dp" />
 
-                <!-- Thành tích -->
                 <TextView
                     android:id="@+id/tvAchievements"
                     android:layout_width="match_parent"
@@ -163,7 +155,6 @@
                     android:textSize="14sp"
                     android:layout_marginBottom="8dp" />
 
-                <!-- Đã đăng ký -->
                 <TextView
                     android:id="@+id/tvEnrolledCourses"
                     android:layout_width="match_parent"
@@ -257,14 +248,13 @@
             </LinearLayout>
 
             <ProgressBar
-                android:id="@+id/progressBar"
+                android:id="@+id/profileLoading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
                 android:layout_marginBottom="16dp" />
 
             <Button
-                android:id="@+id/btnLogout"
                 android:id="@+id/btnLuu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -299,7 +289,6 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
-            android:id="@+id/homeButton"
             android:id="@+id/nav_home"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
