@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.services)
+    id("kotlin-parcelize")
 }
 
 
@@ -45,6 +46,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation("de.hdodenhof:circleimageview:3.1.0")
+    implementation("com.google.ai.client.generativeai:generativeai:0.1.1")
 
     // Firebase
     implementation(platform(libs.firebase.bom))
@@ -76,10 +78,13 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(platform(libs.firebase.bom))
+
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-database")
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-database")
     implementation("com.google.android.gms:play-services-auth:21.2.0")
+    implementation("com.google.ai.client.generativeai:generativeai:0.1.1")
+
 }

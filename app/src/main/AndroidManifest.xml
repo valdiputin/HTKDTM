@@ -39,6 +39,10 @@
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />
+        <activity android:name=".QuizActivity"
+            android:exported="false"
+            android:label="Bài Quiz"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ProfileActivity"
             android:exported="false" />
