@@ -17,18 +17,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.service.FirebaseService
 
 class MainActivity : AppCompatActivity() {
 
-    // 1. Khai báo biến Firebase Auth
-    private lateinit var auth: FirebaseAuth
-
-    // 2. Khai báo biến cho EditTexts
-    private lateinit var emailEditText: TextInputEditText
-    private lateinit var passwordEditText: TextInputEditText
+    private lateinit var edtEmail: TextInputEditText
+    private lateinit var edtPassword: TextInputEditText
+    private lateinit var btnLogin: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -44,58 +42,63 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        // 3. Khởi tạo Firebase Auth
-        auth = Firebase.auth
+        setupViews()
 
-        // 4. Ánh xạ EditTexts
-        emailEditText = findViewById(R.id.edtEmail)
-        passwordEditText = findViewById(R.id.edtPassword)
+        // Check if user is already logged in
+        if (FirebaseService.getCurrentUser() != null) {
+            navigateToHome()
+        }
+    }
 
-        // --- Nút Đăng Ký ---
+    private fun setupViews() {
+        edtEmail = findViewById(R.id.edtEmail)
+        edtPassword = findViewById(R.id.edtPassword)
+        btnLogin = findViewById(R.id.btnLogin)
+
         val btnRegister = findViewById<Button>(R.id.tvSignInHeader)
         btnRegister.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
 
-        // --- Nút Đăng Nhập ---
-        val btnLogin = findViewById<Button>(R.id.btnLogin)
         btnLogin.setOnClickListener {
-            performLogin()
+            login()
         }
     } // Kết thúc hàm onCreate
 
-    /**
-     * Hàm này đọc email/pass và gọi Firebase để xác thực
-     */
-    private fun performLogin() {
-        // ... (Giữ nguyên logic performLogin của bạn) ...
-        val email = emailEditText.text.toString().trim()
-        val password = passwordEditText.text.toString().trim()
+    private fun login() {
+        val email = edtEmail.text?.toString()?.trim() ?: ""
+        val password = edtPassword.text?.toString() ?: ""
 
-        if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Vui lòng nhập email và mật khẩu", Toast.LENGTH_SHORT).show()
+        if (email.isEmpty()) {
+            Toast.makeText(this, "Vui lòng nhập email", Toast.LENGTH_SHORT).show()
             return
         }
 
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(baseContext, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show()
+        if (password.isEmpty()) {
+            Toast.makeText(this, "Vui lòng nhập mật khẩu", Toast.LENGTH_SHORT).show()
+            return
+        }
 
-                    val intent = Intent(this, HomeActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
-                    finish()
+        btnLogin.isEnabled = false
 
-                } else {
-                    Toast.makeText(
-                        baseContext,
-                        "Đăng nhập thất bại: ${task.exception?.message}",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
+        CoroutineScope(Dispatchers.Main).launch {
+            val result = FirebaseService.login(email, password)
+
+            result.onSuccess {
+                Toast.makeText(this@MainActivity, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show()
+                navigateToHome()
+            }.onFailure { exception ->
+                Toast.makeText(this@MainActivity, "Đăng nhập thất bại: ${exception.message}", Toast.LENGTH_LONG).show()
+                btnLogin.isEnabled = true
             }
+        }
+    }
+
+    private fun navigateToHome() {
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     // --- CÁC HÀM XỬ LÝ NGÔN NGỮ (COPY TỪ BaseActivity.java) ---

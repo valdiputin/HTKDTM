@@ -4,12 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 
-// Cần import Activity đích
-import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.AITutorActivity;
-import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.R;
-import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.LanguageActivity;
-import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.ClassingActivity;
-
 public class HomeActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {

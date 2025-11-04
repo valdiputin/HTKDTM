@@ -1,33 +1,13 @@
 {
   "project_info": {
-    "project_number": "811924009657",
-    "firebase_url": "https://edupathapp-bb3cc-default-rtdb.firebaseio.com",
-    "project_id": "edupathapp-bb3cc",
-    "storage_bucket": "edupathapp-bb3cc.firebasestorage.app"
+    "project_number": "1014852112031",
+    "project_id": "edupath-5b91d",
+    "storage_bucket": "edupath-5b91d.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:811924009657:android:7dbc70a196111739266168",
-        "android_client_info": {
-          "package_name": "com.example.edupath"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDAukCN-UrNRPxkkL-lmcW2saZZZ-Y8ngg"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:811924009657:android:625d08c112851b70266168",
+        "mobilesdk_app_id": "1:1014852112031:android:0517f495210a6e1edb5caa",
         "android_client_info": {
           "package_name": "vn.edu.tlu.cse.ht1.lequocthinh.kdtm"
         }
@@ -35,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDAukCN-UrNRPxkkL-lmcW2saZZZ-Y8ngg"
+          "current_key": "AIzaSyDEmonp1LzVkGXv14pwVIF4wbk_WC_zHuw"
         }
       ],
       "services": {

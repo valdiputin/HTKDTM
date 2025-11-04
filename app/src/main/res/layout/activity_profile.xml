@@ -40,8 +40,10 @@
                 app:civ_border_color="#FFFFFF"/>
 
             <TextView
+                android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Người dùng"
                 android:text="@string/profile_name"
                 android:textColor="#000000"
                 android:textStyle="bold"
@@ -49,21 +51,27 @@
                 android:layout_marginTop="12dp" />
 
             <TextView
+                android:id="@+id/tvEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="email@example.com"
                 android:text="@string/profile_address"
                 android:textColor="#777777"
                 android:textSize="14sp"
                 android:layout_marginTop="4dp" />
 
             <TextView
+                android:id="@+id/tvPhone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/profile_phone"
+                android:text="Chưa cập nhật"
                 android:textColor="#777777"
                 android:textSize="14sp"
-                android:layout_marginTop="2dp" />
+                android:layout_marginTop="2dp"
+                android:visibility="gone" />
 
+            <!-- Dashboard theo dõi tiến độ -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -71,6 +79,107 @@
                 android:orientation="vertical"
                 android:padding="16dp"
                 android:layout_marginTop="24dp"
+                android:elevation="2dp"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dashboard Theo Dõi Tiến Độ"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Điểm số -->
+                <TextView
+                    android:id="@+id/tvScore"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Điểm trung bình: 0.0/10"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="12dp" />
+
+                <!-- Phần trăm hoàn thành -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="12dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="4dp">
+
+                        <TextView
+                            android:id="@+id/tvCompletionPercent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="0% hoàn thành"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tvCompletedCourses"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0 khóa học"
+                            android:textColor="#666666"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <ProgressBar
+                        android:id="@+id/progressBarCompletion"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"
+                        android:max="100"
+                        android:progress="0"
+                        android:progressTint="#F4A100" />
+                </LinearLayout>
+
+                <!-- Thời gian học -->
+                <TextView
+                    android:id="@+id/tvStudyTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Thời gian học: 0 giờ"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="12dp" />
+
+                <!-- Thành tích -->
+                <TextView
+                    android:id="@+id/tvAchievements"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0 thành tích"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- Đã đăng ký -->
+                <TextView
+                    android:id="@+id/tvEnrolledCourses"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Đã đăng ký: 0 khóa học"
+                    android:textColor="#666666"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_info_background"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:layout_marginTop="16dp"
                 android:elevation="2dp"
                 android:layout_marginBottom="16dp">
 
@@ -147,7 +256,15 @@
 
             </LinearLayout>
 
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginBottom="16dp" />
+
             <Button
+                android:id="@+id/btnLogout"
                 android:id="@+id/btnLuu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -182,12 +299,16 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
+            android:id="@+id/homeButton"
             android:id="@+id/nav_home"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground">
 
             <ImageView
                 android:layout_width="24dp"
