@@ -1,8 +1,11 @@
-// Message.kt
+// vn/edu/tlu/cse/ht1/lequocthinh/kdtm/model/Message.kt
 package vn.edu.tlu.cse.ht1.lequocthinh.kdtm.model
+
+import android.graphics.Bitmap // 👈 1. Phải có dòng import này
 
 data class Message(
     val text: String,
-    val isUser: Boolean, // True nếu là tin nhắn người dùng, False nếu là AI
+    val isUser: Boolean,
+    val image: Bitmap? = null, // 👈 2. Phải có trường này
     val timestamp: Long = System.currentTimeMillis()
 )
