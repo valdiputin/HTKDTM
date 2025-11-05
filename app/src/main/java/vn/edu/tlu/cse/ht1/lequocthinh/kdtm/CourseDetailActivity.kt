@@ -7,10 +7,12 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.ai.client.generativeai.GenerativeModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,6 +21,10 @@ import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.adapter.LessonAdapter
 import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.model.Course
 import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.model.Lesson
 import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.service.FirebaseService
+
+// 💡 Hằng số của bạn (Giữ nguyên ở đây)
+const val GEMINI_API_KEY = "AIzaSyDWNQVAX2PwvFe7b0yY1Ce2QobrTJQRk2Y"
+const val GEMINI_MODEL = "gemini-1.5-flash" // 1.5-flash là model ổn định
 
 class CourseDetailActivity : AppCompatActivity() {
 
@@ -31,19 +37,36 @@ class CourseDetailActivity : AppCompatActivity() {
     private lateinit var lessonsRecyclerView: RecyclerView
     private lateinit var progressBar: ProgressBar
 
+    // 💡 Biến cho Gemini
+    private lateinit var generativeModel: GenerativeModel
+    private var loadingDialog: AlertDialog? = null
+
     private var course: Course? = null
     private var courseId: String = ""
     private var lastClickedLessonId: String = "" // Track last clicked lesson
-    private var isAppReturnedFromYouTube: Boolean = false // Track if app returned from YouTube
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_detail)
 
         courseId = intent.getStringExtra("courseId") ?: ""
-        
+
         setupViews()
+        setupGemini() // Khởi tạo Gemini
         loadCourseDetails()
+    }
+
+    // 💡 HÀM ĐÃ SỬA LỖI
+    private fun setupGemini() {
+        // CẢNH BÁO: Không bao giờ để API Key trực tiếp trong code
+        // Đây chỉ là tạm thời để chạy thử
+
+        // Lỗi 1: Xóa 'companion object' khỏi đây.
+        // Lỗi 2 & 3: Sửa lại cú pháp hàm và dùng hằng số
+        generativeModel = GenerativeModel(
+            modelName = "gemini-2.5-flash", // Dùng hằng số
+            apiKey = GEMINI_API_KEY   // Dùng hằng số
+        )
     }
 
     private fun setupViews() {
@@ -77,7 +100,6 @@ class CourseDetailActivity : AppCompatActivity() {
                     displayCourseInfo(it)
                     displayLessons(it.lessons)
                 } ?: run {
-                    // Course not found, finish activity
                     finish()
                 }
             } catch (e: Exception) {
@@ -90,7 +112,6 @@ class CourseDetailActivity : AppCompatActivity() {
     }
 
     private fun displayCourseInfo(course: Course) {
-        // Load course image
         if (course.imageUrl.isNotEmpty()) {
             Glide.with(this)
                 .load(course.imageUrl)
@@ -119,9 +140,8 @@ class CourseDetailActivity : AppCompatActivity() {
             return
         }
 
-        // Check completed lessons for current user
         val currentUser = FirebaseService.getCurrentUser()
-        
+
         CoroutineScope(Dispatchers.Main).launch {
             val completedLessons = if (currentUser != null) {
                 withContext(Dispatchers.IO) {
@@ -132,25 +152,95 @@ class CourseDetailActivity : AppCompatActivity() {
                 emptyList()
             }
 
-            // Mark lessons as completed
             val lessonsWithStatus = lessons.map { lesson ->
                 lesson.copy(isCompleted = completedLessons.contains(lesson.id))
             }
 
-            lessonsRecyclerView.adapter = LessonAdapter(lessonsWithStatus) { lesson ->
-                // Save lesson ID when clicked (don't mark as completed yet)
-                lastClickedLessonId = lesson.id
-                openYouTubeVideo(lesson)
-                // Note: Lesson will be marked as completed when user returns to app
+            // Gọi Adapter với 2 listener
+            lessonsRecyclerView.adapter = LessonAdapter(
+                lessons = lessonsWithStatus,
+                onLessonClick = { lesson ->
+                    // Logic xem video
+                    lastClickedLessonId = lesson.id
+                    openYouTubeVideo(lesson)
+                },
+                onSummaryClick = { lesson ->
+                    // Logic gọi Gemini
+                    handleSummaryClick(lesson)
+                }
+            )
+        }
+    }
+
+    // 💡 --- CÁC HÀM CỦA GEMINI (Giữ nguyên) ---
+
+    private fun handleSummaryClick(lesson: Lesson) {
+        if (lesson.transcriptText.isBlank()) {
+            showSummaryDialog("Không có nội dung", "Bài học này chưa có nội dung văn bản (transcript) để tóm tắt.")
+            return
+        }
+
+        showLoadingDialog("Đang tạo tóm tắt...")
+
+        val prompt = """
+            Bạn là một trợ lý học tập. Hãy tóm tắt lại nội dung bài học sau đây 
+            theo các ý chính gạch đầu dòng ngắn gọn:
+
+            Nội dung bài học:
+            "${lesson.transcriptText}"
+        """.trimIndent()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = generativeModel.generateContent(prompt)
+                withContext(Dispatchers.Main) {
+                    hideLoadingDialog()
+                    showSummaryDialog("Tóm tắt: ${lesson.title}", response.text ?: "Không thể tạo tóm tắt.")
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    hideLoadingDialog()
+                    showSummaryDialog("Lỗi", "Đã xảy ra lỗi khi tóm tắt: ${e.message}")
+                }
             }
         }
     }
 
+    private fun showSummaryDialog(title: String, summary: String) {
+        AlertDialog.Builder(this)
+            .setTitle(title)
+            .setMessage(summary)
+            .setPositiveButton("Đã hiểu") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    private fun showLoadingDialog(message: String) {
+        val builder = AlertDialog.Builder(this)
+        val inflater = layoutInflater
+        // Đảm bảo bạn có file res/layout/dialog_loading.xml
+        val dialogView = inflater.inflate(R.layout.dialog_loading, null)
+        val textView = dialogView.findViewById<TextView>(R.id.loadingText)
+        textView.text = message
+
+        builder.setView(dialogView)
+        builder.setCancelable(false)
+        loadingDialog = builder.create()
+        loadingDialog?.show()
+    }
+
+    private fun hideLoadingDialog() {
+        loadingDialog?.dismiss()
+    }
+
+    // --- KẾT THÚC HÀM GEMINI ---
+
+
     private fun openYouTubeVideo(lesson: Lesson) {
         val videoId = lesson.getVideoId()
-        
+
         if (videoId.isEmpty()) {
-            // If no video ID, try to open URL directly
             if (lesson.youtubeUrl.isNotEmpty()) {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(lesson.youtubeUrl))
                 startActivity(intent)
@@ -158,38 +248,33 @@ class CourseDetailActivity : AppCompatActivity() {
             return
         }
 
-        // Try to open YouTube app first, then fallback to browser
         try {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:$videoId"))
             startActivity(intent)
         } catch (e: Exception) {
-            // Fallback to web browser
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=$videoId"))
             startActivity(intent)
         }
     }
-    
+
     override fun onResume() {
         super.onResume()
-        // When user returns from YouTube, mark lesson as completed
+        // Logic đánh dấu hoàn thành (Giữ nguyên)
         if (lastClickedLessonId.isNotEmpty() && courseId.isNotEmpty()) {
             val currentUser = FirebaseService.getCurrentUser()
             currentUser?.let { firebaseUser ->
-                // Check if lesson is already completed
                 CoroutineScope(Dispatchers.Main).launch {
                     val user = withContext(Dispatchers.IO) {
                         FirebaseService.getUserById(firebaseUser.uid)
                     }
-                    val isAlreadyCompleted = user?.studyHistory?.any { 
-                        it.lessonId == lastClickedLessonId 
+                    val isAlreadyCompleted = user?.studyHistory?.any {
+                        it.lessonId == lastClickedLessonId
                     } ?: false
-                    
-                    // Only mark as completed if not already completed
+
                     if (!isAlreadyCompleted) {
                         withContext(Dispatchers.IO) {
                             FirebaseService.markLessonCompleted(firebaseUser.uid, courseId, lastClickedLessonId)
                         }
-                        // Reload lessons to update UI
                         course?.let {
                             displayLessons(it.lessons)
                         }

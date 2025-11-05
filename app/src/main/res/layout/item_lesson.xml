@@ -1,62 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/lessonCard"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lessonRootLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="2dp"
-    android:layout_marginBottom="12dp">
+    android:padding="16dp"
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/lessonIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@android:drawable/ic_media_play"
+        app:tint="?attr/colorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:contentDescription="Icon bài học" />
+
+    <TextView
+        android:id="@+id/lessonTitle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="12dp"
-        android:gravity="center_vertical">
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        tools:text="Tên bài học dài để test"
+        android:textColor="#333333"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/lessonIcon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/buttonSummarize"
+        app:layout_constraintBottom_toTopOf="@id/lessonDuration"
+        app:layout_constraintVertical_chainStyle="packed"/>
 
-        <ImageView
-            android:id="@+id/playIcon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_play_circle"
-            android:layout_marginEnd="12dp"
-            android:tint="#F4A100" />
+    <TextView
+        android:id="@+id/lessonDuration"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="05:30"
+        android:textColor="#888888"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/lessonTitle"
+        app:layout_constraintTop_toBottomOf="@id/lessonTitle"
+        app:layout_constraintEnd_toEndOf="@id/lessonTitle"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+    <Button
+        android:id="@+id/buttonSummarize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:minWidth="48dp"
+        android:text="Tóm tắt"
+        style="?android:attr/borderlessButtonStyle"
+        android:textColor="?attr/colorPrimary"
+        android:textSize="12sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="4dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@id/iconCompleted"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-            <TextView
-                android:id="@+id/lessonTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Lesson Title"
-                android:textColor="#000000"
-                android:textStyle="bold"
-                android:textSize="14sp" />
+    <ImageView
+        android:id="@+id/iconCompleted"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@android:drawable/checkbox_on_background"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_marginStart="4dp"
+        app:tint="#4CAF50"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:contentDescription="Đã hoàn thành" />
 
-            <TextView
-                android:id="@+id/lessonDuration"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="10:30"
-                android:textColor="#666666"
-                android:textSize="12sp"
-                android:layout_marginTop="4dp" />
-
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/completedIcon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_check_circle"
-            android:tint="#4CAF50"
-            android:visibility="gone" />
-
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
-
+</androidx.constraintlayout.widget.ConstraintLayout>
