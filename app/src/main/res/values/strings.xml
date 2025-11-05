@@ -38,6 +38,9 @@
     <string name="bai_tap">Bài tập</string>
     <string name="course_image_description">Course Image</string>
     <string name="lesson_status_icon">Lesson Status Icon</string>
+
+    <string name="default_web_client_id">[YOUR_WEB_CLIENT_ID_HERE]</string>
+
     <string-array name="filter_options">
         <item>Lọc</item>
         <item>Mới nhất</item>

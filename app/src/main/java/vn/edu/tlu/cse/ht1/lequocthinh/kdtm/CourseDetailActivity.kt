@@ -24,7 +24,7 @@ import android.app.ProgressDialog
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
-import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.utils.GeminiHelper
+import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.GeminiHelper
 
 class CourseDetailActivity : AppCompatActivity() {
 

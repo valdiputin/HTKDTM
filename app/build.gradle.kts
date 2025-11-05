@@ -65,12 +65,8 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation("de.hdodenhof:circleimageview:3.1.0")
 
-    // Google Gemini AI
-    implementation("com.google.ai.client.generativeai:generativeai:0.1.2")
-
+    // Google Gemini AI (Chỉ giữ lại phiên bản mới nhất: 0.9.0)
     implementation("com.google.ai.client.generativeai:generativeai:0.9.0")
-
-
 
     // Firebase
     implementation(platform(libs.firebase.bom))
@@ -78,16 +74,19 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.firebase.storage)
     implementation(libs.firebase.database)
-    
+
+    // 🔥 THÊM: Google Play Services Auth (BẮT BUỘC cho Google Sign-In)
+    implementation("com.google.android.gms:play-services-auth:21.0.0")
+
     // Networking
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
     implementation(libs.gson)
-    
+
     // Coroutines
     implementation(libs.coroutines.core)
     implementation(libs.coroutines.android)
-    
+
     // Lifecycle
     implementation(libs.lifecycle.viewmodel)
     implementation(libs.lifecycle.livedata)

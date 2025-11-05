@@ -1,4 +1,4 @@
-package vn.edu.tlu.cse.ht1.lequocthinh.kdtm.utils
+package vn.edu.tlu.cse.ht1.lequocthinh.kdtm
 
 import com.google.ai.client.generativeai.GenerativeModel
 import kotlinx.coroutines.Dispatchers
@@ -13,7 +13,6 @@ object GeminiHelper {
         } catch (e: Exception) {
             return "Lỗi: Không thể lấy GEMINI_API_KEY."
         }
-
         if (apiKey.isBlank() || apiKey == "YOUR_GEMINI_API_KEY_HERE") {
             return "Lỗi: GEMINI_API_KEY không hợp lệ."
         }
@@ -50,3 +49,5 @@ object GeminiHelper {
         }
     }
 }
+
+
