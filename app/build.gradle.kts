@@ -54,7 +54,10 @@ dependencies {
     implementation("de.hdodenhof:circleimageview:3.1.0")
 
     // Google Gemini AI
-    implementation("com.google.ai.client.generativeai:generativeai:0.1.1")
+
+    implementation("com.google.ai.client.generativeai:generativeai:0.9.0")
+
+
 
     // Firebase
     implementation(platform(libs.firebase.bom))

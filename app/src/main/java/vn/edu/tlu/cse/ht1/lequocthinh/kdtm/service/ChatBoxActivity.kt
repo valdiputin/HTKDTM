@@ -1,14 +1,21 @@
-
 package vn.edu.tlu.cse.ht1.lequocthinh.kdtm
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.ai.client.generativeai.GenerativeModel
-import com.google.ai.client.generativeai.Chat
-import kotlinx.coroutines.*
+import com.google.ai.client.generativeai.type.content
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.adapter.MessageAdapter
 import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.model.Message
 
@@ -16,18 +23,36 @@ class ChatBoxActivity : BaseActivity() {
 
     private lateinit var etMessageInput: EditText
     private lateinit var btnSend: ImageButton
+    private lateinit var btnUploadImage: ImageButton
     private lateinit var recyclerViewChat: RecyclerView
     private lateinit var chatLoadingBar: ProgressBar
 
     private lateinit var chatAdapter: MessageAdapter
     private val messages = mutableListOf<Message>()
 
-    // Đối tượng Chat để duy trì bối cảnh hội thoại
-    private lateinit var chatSession: Chat
+    private lateinit var generativeModel: GenerativeModel
+    private var selectedBitmap: Bitmap? = null
 
     companion object {
-        const val GEMINI_API_KEY = "AIzaSyDWNQVAX2PwvFe7b0yY1Ce2QobrTJQRk2Y" // Khóa API của bạn
+        const val GEMINI_API_KEY = "AIzaSyDWNQVAX2PwvFe7b0yY1Ce2QobrTJQRk2Y"
         const val GEMINI_MODEL = "gemini-2.5-flash"
+
+    }
+
+    private val pickImageLauncher = registerForActivityResult(
+        ActivityResultContracts.GetContent()
+    ) { uri: Uri? ->
+        uri?.let {
+            try {
+                val inputStream = contentResolver.openInputStream(it)
+                selectedBitmap = BitmapFactory.decodeStream(inputStream)
+                btnUploadImage.setImageBitmap(selectedBitmap)
+            } catch (e: Exception) {
+                Log.e("ChatBoxActivity", "Không thể load ảnh", e)
+                Toast.makeText(this, "Không thể load ảnh", Toast.LENGTH_SHORT).show()
+                resetUploadButtonIcon()
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,78 +61,76 @@ class ChatBoxActivity : BaseActivity() {
 
         etMessageInput = findViewById(R.id.etMessageInput)
         btnSend = findViewById(R.id.btnSend)
+        btnUploadImage = findViewById(R.id.btnUploadImage)
         recyclerViewChat = findViewById(R.id.recyclerViewChat)
         chatLoadingBar = findViewById(R.id.chatLoadingBar)
 
         setupChatAdapter()
-        initializeGeminiChat()
+        initializeGemini()
 
-        btnSend.setOnClickListener {
-            sendMessage()
-        }
+        btnSend.setOnClickListener { sendMessage() }
+        btnUploadImage.setOnClickListener { pickImageLauncher.launch("image/*") }
     }
 
     private fun setupChatAdapter() {
         chatAdapter = MessageAdapter(messages)
         recyclerViewChat.layoutManager = LinearLayoutManager(this).apply {
-            stackFromEnd = true // Hiển thị tin nhắn mới nhất ở dưới cùng
+            stackFromEnd = true
         }
         recyclerViewChat.adapter = chatAdapter
     }
 
-    private fun initializeGeminiChat() {
-        // Cần có prompt hệ thống để định hình vai trò của AI
-        val systemInstruction = "Bạn là Gia sư AI thân thiện và kiên nhẫn, chuyên về các khóa học lập trình và công nghệ. Hãy trả lời ngắn gọn, tập trung vào kiến thức công nghệ và luôn giữ thái độ tích cực."
-
-        // Tạo đối tượng GenerativeModel và Chat session
-        val model = GenerativeModel(
-            GEMINI_MODEL,
-            GEMINI_API_KEY,
-            // Thêm cấu hình nếu cần
-            // config = generateModelConfiguration { 
-            //     systemInstruction = systemInstruction
-            // }
+    private fun initializeGemini() {
+        generativeModel = GenerativeModel(
+            modelName = GEMINI_MODEL,
+            apiKey = GEMINI_API_KEY
         )
-
-        // Bắt đầu một Chat session mới (sẽ ghi nhớ lịch sử)
-        chatSession = model.startChat()
-
-        // Tin nhắn chào mừng ban đầu
-        addMessage(Message("Chào bạn! Tôi là Gia sư AI. Bạn có thắc mắc gì về các lớp học hoặc công nghệ không?", false))
+        addMessage(Message("Chào bạn! Tôi là Gia sư AI. Bạn có thể hỏi tôi hoặc gửi ảnh để tôi phân tích nhé!", false))
     }
 
     private fun sendMessage() {
-        val userMessage = etMessageInput.text.toString().trim()
-        if (userMessage.isBlank()) return
+        val userMessageText = etMessageInput.text.toString().trim()
+        val imageToSend = selectedBitmap
 
-        // 1. Thêm tin nhắn người dùng và làm sạch input
-        addMessage(Message(userMessage, true))
+        if (userMessageText.isBlank() && imageToSend == null) {
+            Toast.makeText(this, "Vui lòng nhập câu hỏi hoặc chọn ảnh", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val userMessage = Message(userMessageText, true, imageToSend)
+        addMessage(userMessage)
         etMessageInput.setText("")
+        selectedBitmap = null
+        resetUploadButtonIcon()
         setLoading(true)
 
-        // 2. Gọi AI trong Coroutine
-        CoroutineScope(Dispatchers.Main).launch {
+        lifecycleScope.launch {
             try {
-                // Thêm tin nhắn chờ phản hồi (AI)
-                addMessage(Message("...", false))
+                addMessage(Message("...", false, null))
 
-                // Gửi tin nhắn qua Chat Session để duy trì bối cảnh
+                val history = messages
+                    .filter { it.text != "..." }
+                    .map { msg ->
+                        content(role = if (msg.isUser) "user" else "model") {
+                            msg.image?.let { image(it) }
+                            text(msg.text)
+                        }
+                    }
+
                 val response = withContext(Dispatchers.IO) {
-                    chatSession.sendMessage(userMessage)
+                    generativeModel.generateContent(*history.toTypedArray())
                 }
 
-                // 3. Cập nhật tin nhắn AI cuối cùng
-                updateLastMessage(response.text ?: "Lỗi: Không nhận được phản hồi hợp lệ.")
+                updateLastMessage(response.text ?: "Không có phản hồi từ Gemini.")
 
             } catch (e: Exception) {
-                updateLastMessage("Xin lỗi, đã xảy ra lỗi kết nối: ${e.message}")
+                Log.e("ChatBoxActivity", "Lỗi API Gemini", e)
+                updateLastMessage("Xin lỗi, đã xảy ra lỗi: ${e.message}")
             } finally {
                 setLoading(false)
             }
         }
     }
-
-    // --- Các hàm tiện ích để cập nhật UI ---
 
     private fun addMessage(message: Message) {
         messages.add(message)
@@ -127,5 +150,10 @@ class ChatBoxActivity : BaseActivity() {
     private fun setLoading(isLoading: Boolean) {
         chatLoadingBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         btnSend.isEnabled = !isLoading
+        btnUploadImage.isEnabled = !isLoading
+    }
+
+    private fun resetUploadButtonIcon() {
+        btnUploadImage.setImageResource(android.R.drawable.ic_menu_gallery)
     }
 }

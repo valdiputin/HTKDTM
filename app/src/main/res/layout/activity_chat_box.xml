@@ -25,10 +25,17 @@
         android:padding="8dp"
         android:background="#FFFFFF"
         android:elevation="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="center_vertical" app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
+        <ImageButton
+            android:id="@+id/btnUploadImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@android:drawable/ic_menu_gallery" android:background="@drawable/circular_button_background" android:backgroundTint="#E0E0E0" app:tint="@color/black"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="Tải ảnh lên để tìm kiếm" />
         <EditText
             android:id="@+id/etMessageInput"
             android:layout_width="0dp"
@@ -48,7 +55,7 @@
             android:src="@drawable/ic_send"
             android:background="@drawable/circular_button_background"
             android:backgroundTint="#F4A100"
-            android:tint="@color/black"
+            app:tint="@color/black"
             android:contentDescription="Gửi tin nhắn" />
 
     </LinearLayout>
