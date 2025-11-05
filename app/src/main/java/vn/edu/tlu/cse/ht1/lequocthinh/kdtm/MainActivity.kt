@@ -13,6 +13,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.service.FirebaseService
+import java.util.Locale
+import com.google.ai.client.generativeai.GenerativeModel
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
     
@@ -74,18 +77,77 @@ class MainActivity : AppCompatActivity() {
             val result = FirebaseService.login(email, password)
             
             result.onSuccess {
-                Toast.makeText(this@MainActivity, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, "Đăng nhập thành công!", Toast.LENGTH_SHORT)
+                    .show()
                 navigateToHome()
             }.onFailure { exception ->
-                Toast.makeText(this@MainActivity, "Đăng nhập thất bại: ${exception.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this@MainActivity,
+                    "Đăng nhập thất bại: ${exception.message}",
+                    Toast.LENGTH_LONG
+                ).show()
                 btnLogin.isEnabled = true
             }
         }
     }
-    
+
+    // ------------------ Đăng nhập Google ------------------
+    private val googleSignInLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+            if (task.isSuccessful) {
+                val account = task.result
+                val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+                auth.signInWithCredential(credential).addOnCompleteListener { task2 ->
+                    if (task2.isSuccessful) {
+                        Toast.makeText(this, "Đăng nhập Google thành công!", Toast.LENGTH_SHORT)
+                            .show()
+                        navigateToHome()
+                    } else {
+                        Toast.makeText(
+                            this,
+                            "Lỗi xác thực Firebase: ${task2.exception?.message}",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+            } else {
+                Toast.makeText(this, "Đăng nhập Google thất bại!", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+    private fun signInWithGoogle() {
+        val signInIntent = googleSignInClient.signInIntent
+        googleSignInLauncher.launch(signInIntent)
+    }
+
+    // ------------------ Điều hướng sang màn hình chính ------------------
     private fun navigateToHome() {
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
         finish()
     }
+
+    // ------------------ Xử lý đa ngôn ngữ ------------------
+    private fun loadLocale() {
+        val prefs = getSharedPreferences("AppSettings", Context.MODE_PRIVATE)
+        val language = prefs.getString("Language", "en") ?: "en"
+        setLocale(this, language)
+    }
+
+    private fun setLocale(context: Context, languageCode: String) {
+        val locale = Locale(languageCode)
+        Locale.setDefault(locale)
+
+        val resources: Resources = context.resources
+        val config: Configuration = resources.configuration
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.displayMetrics)
+    }
+
+
+
+
 }
+
+

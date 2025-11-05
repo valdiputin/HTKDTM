@@ -19,6 +19,12 @@ import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.adapter.LessonAdapter
 import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.model.Course
 import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.model.Lesson
 import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.service.FirebaseService
+import android.app.AlertDialog
+import android.app.ProgressDialog
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
+import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.utils.GeminiHelper
 
 class CourseDetailActivity : AppCompatActivity() {
 
@@ -140,10 +146,55 @@ class CourseDetailActivity : AppCompatActivity() {
             lessonsRecyclerView.adapter = LessonAdapter(lessonsWithStatus) { lesson ->
                 // Save lesson ID when clicked (don't mark as completed yet)
                 lastClickedLessonId = lesson.id
+//                Hàm xử lý tóm tắt video
+//                tomTatNoiDung(lesson)
                 openYouTubeVideo(lesson)
                 // Note: Lesson will be marked as completed when user returns to app
             }
         }
+    }
+
+
+    private fun tomTatNoiDung(lesson: Lesson) {
+        val videoUrl = lesson.youtubeUrl
+
+        if (videoUrl.isEmpty()) {
+            Toast.makeText(this, "URL video trống", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val progressDialog = ProgressDialog(this).apply {
+            setMessage("Đang phân tích video...")
+            setCancelable(false)
+            show()
+        }
+
+        lifecycleScope.launch {
+            try {
+                // 👇 Gọi hàm từ GeminiHelper
+                val summary = GeminiHelper.summarizeYouTubeContent(videoUrl)
+
+                progressDialog.dismiss()
+
+                if (summary.startsWith("Lỗi:")) {
+                    Toast.makeText(this@CourseDetailActivity, summary, Toast.LENGTH_LONG).show()
+                } else {
+                    showSummaryDialog(summary)
+                }
+
+            } catch (e: Exception) {
+                progressDialog.dismiss()
+                Toast.makeText(this@CourseDetailActivity, "Lỗi: ${e.message}", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    private fun showSummaryDialog(summary: String) {
+        AlertDialog.Builder(this)
+            .setTitle("Tóm tắt nội dung video")
+            .setMessage(summary)
+            .setPositiveButton("Đóng", null)
+            .show()
     }
 
     private fun openYouTubeVideo(lesson: Lesson) {

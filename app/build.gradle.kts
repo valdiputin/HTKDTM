@@ -1,7 +1,12 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.services)
+    id("kotlin-parcelize")
+    id("kotlin-kapt")
 }
 
 
@@ -10,6 +15,15 @@ android {
     compileSdk = 36
 
     defaultConfig {
+        // 🔥 CÁCH ĐƠN GIẢN: Đọc trực tiếp từ gradle.properties hoặc local.properties
+        val apiKey = providers.gradleProperty("GEMINI_API_KEY").orNull
+            ?: project.findProperty("GEMINI_API_KEY")?.toString()
+            ?: ""
+
+        println("🔑 GEMINI_API_KEY loaded: ${if (apiKey.isNotEmpty()) "YES (${apiKey.length} chars)" else "NO - EMPTY!"}")
+
+        buildConfigField("String", "GEMINI_API_KEY", "\"$apiKey\"")
+
         applicationId = "vn.edu.tlu.cse.ht1.lequocthinh.kdtm"
         minSdk = 24
         targetSdk = 36
@@ -35,6 +49,11 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+    buildFeatures {
+        viewBinding = true
+        buildConfig = true
+    }
 }
 
 dependencies {
@@ -45,7 +64,14 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation("de.hdodenhof:circleimageview:3.1.0")
-    
+
+    // Google Gemini AI
+    implementation("com.google.ai.client.generativeai:generativeai:0.1.2")
+
+    implementation("com.google.ai.client.generativeai:generativeai:0.9.0")
+
+
+
     // Firebase
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.firestore)
@@ -65,14 +91,27 @@ dependencies {
     // Lifecycle
     implementation(libs.lifecycle.viewmodel)
     implementation(libs.lifecycle.livedata)
-    
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
+
     // UI Components
     implementation(libs.recyclerview)
     implementation(libs.cardview)
     implementation(libs.glide)
-    
+
+    // Room Database
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+
     // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions {
+        jvmTarget = "11"
+        allWarningsAsErrors = false
+    }
 }
