@@ -1,11 +1,17 @@
 package vn.edu.tlu.cse.ht1.lequocthinh.kdtm
 
+import android.Manifest
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.LinearLayout // <<< THÊM IMPORT NÀY
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineScope
@@ -16,7 +22,6 @@ import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.adapter.CourseAdapter
 import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.model.Course
 import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.service.CourseRecommendationService
 import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.service.FirebaseService
-
 
 class HomeActivity : BaseActivity() {
 
@@ -39,9 +44,34 @@ class HomeActivity : BaseActivity() {
         loadCourses()
         setupBottomNavigation(R.id.nav_home)
 
-        // -----------------------------------------------------------------
-        // SỬA: ĐÃ GỘP LOGIC CLICK TỪ FILE .java VÀO ĐÂY
-        // -----------------------------------------------------------------
+        // ✅ THÊM PHẦN NÀY — TẠO KÊNH THÔNG BÁO NHẮC HỌC
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                "study_channel",
+                "Nhắc học tập",
+                NotificationManager.IMPORTANCE_HIGH
+            )
+            channel.description = "Kênh thông báo nhắc học tập"
+            val manager = getSystemService(NotificationManager::class.java)
+            manager.createNotificationChannel(channel)
+        }
+
+        // ✅ Android 13 trở lên cần xin quyền thông báo
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                    101
+                )
+            }
+        }
+
+        // ✅ Gọi lại logic click categories
         setupCategoryClickListeners()
     }
 
@@ -55,20 +85,20 @@ class HomeActivity : BaseActivity() {
     private fun setupRecyclerViews() {
         // Recommended courses RecyclerView
         recommendedRecyclerView = findViewById(R.id.recommendedRecyclerView)
-        recommendedRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        recommendedRecyclerView.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         // Popular courses RecyclerView
         popularRecyclerView = findViewById(R.id.popularRecyclerView)
-        popularRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        popularRecyclerView.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         // Free courses RecyclerView
         freeRecyclerView = findViewById(R.id.freeRecyclerView)
-        freeRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        freeRecyclerView.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
     }
 
-    // -----------------------------------------------------------------
-    // SỬA: HÀM MỚI ĐƯỢC THÊM VÀO TỪ FILE .java
-    // -----------------------------------------------------------------
     private fun setupCategoryClickListeners() {
         // Nút 1: Các Lớp Học
         val classesCategory: LinearLayout? = findViewById(R.id.category_classes)
@@ -90,6 +120,14 @@ class HomeActivity : BaseActivity() {
             val intent = Intent(this, AITutorActivity::class.java)
             startActivity(intent)
         }
+
+        // ✅ Nút 4: Nhắc học tập
+        val reminderCategory: LinearLayout? = findViewById(R.id.category_certificates)
+        reminderCategory?.setOnClickListener {
+            val intent = Intent(this, vn.edu.tlu.cse.ht1.lequocthinh.kdtm.service.ReminderActivity::class.java)
+            startActivity(intent)
+
+        }
     }
 
     private fun loadCourses() {
@@ -97,36 +135,28 @@ class HomeActivity : BaseActivity() {
 
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                // Load courses from Firebase
                 allCourses = withContext(Dispatchers.IO) {
                     FirebaseService.getAllCourses()
                 }
 
-                // Get current user
                 val currentUser = FirebaseService.getCurrentUser()
                 val user = if (currentUser != null) {
                     withContext(Dispatchers.IO) {
                         FirebaseService.getUserById(currentUser.uid)
                     }
-                } else {
-                    null
-                }
+                } else null
 
-                // Get recommended courses (AI-based recommendation)
-                val recommendedCourses = CourseRecommendationService.getRecommendedCourses(allCourses, user)
+                val recommendedCourses =
+                    CourseRecommendationService.getRecommendedCourses(allCourses, user)
+                val popularCourses =
+                    CourseRecommendationService.getPopularCourses(allCourses)
+                val freeCourses =
+                    CourseRecommendationService.getFreeCourses(allCourses)
 
-                // Get popular courses
-                val popularCourses = CourseRecommendationService.getPopularCourses(allCourses)
-
-                // Get free courses
-                val freeCourses = CourseRecommendationService.getFreeCourses(allCourses)
-
-                // Update UI
                 updateRecyclerViews(recommendedCourses, popularCourses, freeCourses)
 
             } catch (e: Exception) {
                 e.printStackTrace()
-                // Show error or fallback
             } finally {
                 progressBar.visibility = View.GONE
             }
@@ -138,7 +168,6 @@ class HomeActivity : BaseActivity() {
         popular: List<Course>,
         free: List<Course>
     ) {
-        // Update recommended section
         if (recommended.isNotEmpty()) {
             recommendedTitle.visibility = View.VISIBLE
             recommendedRecyclerView.visibility = View.VISIBLE
@@ -150,7 +179,6 @@ class HomeActivity : BaseActivity() {
             recommendedRecyclerView.visibility = View.GONE
         }
 
-        // Update popular section
         if (popular.isNotEmpty()) {
             popularTitle.visibility = View.VISIBLE
             popularRecyclerView.visibility = View.VISIBLE
@@ -162,7 +190,6 @@ class HomeActivity : BaseActivity() {
             popularRecyclerView.visibility = View.GONE
         }
 
-        // Update free section
         if (free.isNotEmpty()) {
             freeTitle.visibility = View.VISIBLE
             freeRecyclerView.visibility = View.VISIBLE
@@ -180,5 +207,4 @@ class HomeActivity : BaseActivity() {
         intent.putExtra("courseId", course.id)
         startActivity(intent)
     }
-
 }
