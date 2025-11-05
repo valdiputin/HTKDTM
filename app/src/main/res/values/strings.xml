@@ -1,9 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">KDTM</string>
     <string name="terms_and_policy">By creating an account, you agree to
     <font color="#FFB300">EduPath\'s Terms &amp; Conditions</font>
     and <font color="#FFB300">Privacy Policy</font>
-</string>
+    </string>
     <string name="edupath">EduPath</string>
     <string name="choose_language">Choose your language</string>
     <string name="vietnamese">Vietnamese</string>
@@ -17,43 +18,44 @@
     <string name="french">French</string>
     <string name="reset">Reset</string>
     <string name="save">Save</string>
-    <string name="cac_lop_hoc">Các Lớp Học</string>
-    <string name="lo_trinh">Lộ Trình</string>
-    <string name="xem_them">Xem Thêm</string>
-    <string name="lop_premium">Lớp Premium</string>
-    <string name="lop_popular">Lớp Popular</string>
-    <string name="lop_freemium">Lớp Freemium</string>
+    <string name="cac_lop_hoc">Classes</string>
+    <string name="lo_trinh">Roadmap</string>
+    <string name="xem_them">See More</string>
+    <string name="lop_premium">Premium Classes</string>
+    <string name="lop_popular">Popular Classes</string>
+    <string name="lop_freemium">Freemium Classes</string>
     <string name="edulearn">EduLearn</string>
-    <string name="chu_de">Chủ đề</string>
-    <string name="ve_lop_hoc">Về lớp học</string>
-    <string name="ui_ux_design_principle">UI/UX Design principle</string>
+    <string name="chu_de">Topic</string>
+    <string name="ve_lop_hoc">About Class</string>
+    <string name="ui_ux_design_principle">UI/UX Design Principle</string>
     <string name="application_history">Application History in the World</string>
     <string name="lessons_duration">10 lessons (1 hour 25 min)</string>
-    <string name="nhan_chung_chi">Nhận chứng chỉ</string>
-    <string name="bai_giang_1">Bài giảng 1</string>
-    <string name="bai_giang_6">Bài giảng 6</string>
-    <string name="bai_giang_7">Bài giảng 7</string>
-    <string name="chi_tiet">Chi tiết</string>
-    <string name="ly_thuyet">Lý thuyết</string>
-    <string name="bai_tap">Bài tập</string>
+    <string name="nhan_chung_chi">Get Certificate</string>
+    <string name="bai_giang_1">Lesson 1</string>
+    <string name="bai_giang_6">Lesson 6</string>
+    <string name="bai_giang_7">Lesson 7</string>
+    <string name="chi_tiet">Details</string>
+    <string name="ly_thuyet">Theory</string>
+    <string name="bai_tap">Exercise</string>
     <string name="course_image_description">Course Image</string>
     <string name="lesson_status_icon">Lesson Status Icon</string>
 
     <string name="default_web_client_id">[YOUR_WEB_CLIENT_ID_HERE]</string>
 
     <string-array name="filter_options">
-        <item>Lọc</item>
-        <item>Mới nhất</item>
-        <item>Phổ biến</item>
+        <item>Filter</item>
+        <item>Newest</item>
+        <item>Popular</item>
     </string-array>
+
     <string-array name="education_levels">
-        <item>Lớp 10</item>
-        <item>Lớp 11</item>
-        <item>Lớp 12</item>
-        <item>Đại học năm 1</item>
-        <item>Đại học năm 2</item>
-        <item>Đại học năm 3</item>
-        <item>Đại học năm 4</item>
+        <item>Grade 10</item>
+        <item>Grade 11</item>
+        <item>Grade 12</item>
+        <item>College Year 1</item>
+        <item>College Year 2</item>
+        <item>College Year 3</item>
+        <item>College Year 4</item>
     </string-array>
 
     <string-array name="age_range">

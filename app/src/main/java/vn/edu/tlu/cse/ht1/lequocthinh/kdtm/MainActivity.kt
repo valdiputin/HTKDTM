@@ -2,6 +2,7 @@ package vn.edu.tlu.cse.ht1.lequocthinh.kdtm
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Bundle
@@ -27,44 +28,51 @@ import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
 
+    // Email login
     private lateinit var edtEmail: TextInputEditText
     private lateinit var edtPassword: TextInputEditText
     private lateinit var btnLogin: Button
 
-    // KHAI BÁO CÁC BIẾN BỊ THIẾU
-    private lateinit var auth: FirebaseAuth
+    // Google login
     private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Gọi loadLocale() TRƯỚC KHI setContentView
+        loadLocale()
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // Khởi tạo Auth và Google Sign-In Client
-        auth = FirebaseAuth.getInstance()
-        initializeGoogleSignIn()
-
         setupViews()
 
-        // Check if user is already logged in
-        if (FirebaseService.getCurrentUser() != null) {
-            navigateToHome()
-        }
-    }
+        // Firebase Auth instance
+        auth = FirebaseAuth.getInstance()
 
-    private fun initializeGoogleSignIn() {
-        // Cấu hình Google Sign-In (Sử dụng R.string.default_web_client_id)
+        // Cấu hình đăng nhập Google
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestIdToken("1014852112031-3r80km5mimsvb13tqcbus9b206vdu9r5.apps.googleusercontent.com")
             .requestEmail()
             .build()
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
+
+        // Nút đăng nhập Google
+        findViewById<Button>(R.id.btnGoogleSignIn).setOnClickListener {
+            signInWithGoogle()
+        }
+
+        // Nếu đã đăng nhập rồi → chuyển thẳng vào Home
+        if (FirebaseService.getCurrentUser() != null) {
+            navigateToHome()
+        }
     }
 
     private fun setupViews() {
@@ -78,16 +86,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        btnLogin.setOnClickListener {
-            login()
-        }
-
-        // VÍ DỤ: Nếu bạn có nút đăng nhập Google, bạn sẽ gán listener ở đây
-        // findViewById<Button>(R.id.btnGoogleSignIn).setOnClickListener {
-        //     signInWithGoogle()
-        // }
+        btnLogin.setOnClickListener { login() }
     }
 
+    // ------------------ Đăng nhập Email/Password ------------------
     private fun login() {
         val email = edtEmail.text?.toString()?.trim() ?: ""
         val password = edtPassword.text?.toString() ?: ""
@@ -106,7 +108,6 @@ class MainActivity : AppCompatActivity() {
 
         CoroutineScope(Dispatchers.Main).launch {
             val result = FirebaseService.login(email, password)
-
             result.onSuccess {
                 Toast.makeText(this@MainActivity, "Đăng nhập thành công!", Toast.LENGTH_SHORT)
                     .show()
@@ -131,15 +132,10 @@ class MainActivity : AppCompatActivity() {
                 val credential = GoogleAuthProvider.getCredential(account.idToken, null)
                 auth.signInWithCredential(credential).addOnCompleteListener { task2 ->
                     if (task2.isSuccessful) {
-                        Toast.makeText(this, "Đăng nhập Google thành công!", Toast.LENGTH_SHORT)
-                            .show()
+                        Toast.makeText(this, "Đăng nhập Google thành công!", Toast.LENGTH_SHORT).show()
                         navigateToHome()
                     } else {
-                        Toast.makeText(
-                            this,
-                            "Lỗi xác thực Firebase: ${task2.exception?.message}",
-                            Toast.LENGTH_LONG
-                        ).show()
+                        Toast.makeText(this, "Lỗi xác thực Firebase: ${task2.exception?.message}", Toast.LENGTH_LONG).show()
                     }
                 }
             } else {
@@ -159,7 +155,7 @@ class MainActivity : AppCompatActivity() {
         finish()
     }
 
-    // ------------------ Xử lý đa ngôn ngữ (Đã cập nhật để dùng API hiện đại hơn) ------------------
+    // ------------------ Xử lý đa ngôn ngữ ------------------
     private fun loadLocale() {
         val prefs = getSharedPreferences("AppSettings", Context.MODE_PRIVATE)
         val language = prefs.getString("Language", "en") ?: "en"
@@ -172,8 +168,6 @@ class MainActivity : AppCompatActivity() {
 
         val resources: Resources = context.resources
         val config: Configuration = resources.configuration
-
-        // Sử dụng setLocale() thay vì updateConfiguration() cũ để tránh Deprecated Warning
         config.setLocale(locale)
         resources.updateConfiguration(config, resources.displayMetrics)
     }

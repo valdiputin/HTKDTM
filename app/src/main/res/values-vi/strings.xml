@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KDTM</string>
+    <string name="terms_and_policy">Bằng việc tạo tài khoản, bạn đồng ý với
+    <font color="#FFB300">Điều khoản &amp; Điều kiện của EduPath</font>
+    và <font color="#FFB300">Chính sách Riêng tư</font>
+    </string>
+    <string name="edupath">EduPath</string>
+    <string name="choose_language">Chọn ngôn ngữ của bạn</string>
+    <string name="vietnamese">Tiếng Việt</string>
+    <string name="english">Tiếng Anh</string>
+    <string name="japanese">Tiếng Nhật</string>
+    <string name="portuguese">Tiếng Bồ Đào Nha</string>
+    <string name="china">Tiếng Trung</string>
+    <string name="korea">Tiếng Hàn</string>
+    <string name="nicaragua">Tiếng Nicaragua</string>
+    <string name="russia">Tiếng Nga</string>
+    <string name="french">Tiếng Pháp</string>
+    <string name="reset">Đặt lại</string>
+    <string name="save">Lưu</string>
+    <string name="cac_lop_hoc">Các Lớp Học</string>
+    <string name="lo_trinh">Lộ Trình</string>
+    <string name="xem_them">Xem Thêm</string>
+    <string name="lop_premium">Lớp Premium</string>
+    <string name="lop_popular">Lớp Phổ biến</string>
+    <string name="lop_freemium">Lớp Miễn phí</string>
+    <string name="edulearn">EduLearn</string>
+    <string name="chu_de">Chủ đề</string>
+    <string name="ve_lop_hoc">Về lớp học</string>
+    <string name="ui_ux_design_principle">Nguyên tắc thiết kế UI/UX</string>
+    <string name="application_history">Lịch sử Ứng dụng trên thế giới</string>
+    <string name="lessons_duration">10 bài học (1 giờ 25 phút)</string>
+    <string name="nhan_chung_chi">Nhận chứng chỉ</string>
+    <string name="bai_giang_1">Bài giảng 1</string>
+    <string name="bai_giang_6">Bài giảng 6</string>
+    <string name="bai_giang_7">Bài giảng 7</string>
+    <string name="chi_tiet">Chi tiết</string>
+    <string name="ly_thuyet">Lý thuyết</string>
+    <string name="bai_tap">Bài tập</string>
+    <string name="course_image_description">Ảnh khóa học</string>
+    <string name="lesson_status_icon">Trạng thái Bài giảng</string>
+    <string name="profile_title">Hồ sơ</string>
+    <string name="profile_name">Phạm Ngọc</string>
+    <string name="profile_address">175 Tây Sơn – Đống Đa – Hà Nội</string>
+    <string name="profile_phone">458-419-7189</string>
+    <string name="edit_information">Chỉnh sửa thông tin</string>
+    <string name="email_address">Địa chỉ Email</string>
+    <string name="password">Mật khẩu</string>
+    <string name="first_name">Tên</string>
+    <string name="last_name">Họ</string>
+    <string name="logout">Đăng xuất</string>
+    <string name="luu">Lưu</string>
+    <string name="chat_with_ai_tutor">Trò chuyện với Gia sư AI</string>
+
+    <string name="edupath_logo_description">Logo EduPath</string>
+    <string name="notifications_description">Thông báo</string>
+    <string name="welcome_message">Xin chào, Ngọc!</string>
+    <string name="welcome_subtitle">Tìm lớp học hoặc lĩnh vực bạn yêu thích tại đây</string>
+    <string name="search_icon_description">Biểu tượng tìm kiếm</string>
+    <string name="search_hint">Tìm lớp</string>
+    <string name="microphone_icon_description">Biểu tượng micro</string>
+
+    <string name="explore_categories">Khám phá danh mục</string>
+    <string name="icon_classes_description">Biểu tượng Lớp học</string>
+    <string name="category_classes">Các lớp học</string>
+    <string name="icon_expand_description">Biểu tượng mở rộng</string>
+    <string name="category_expand">Mở rộng</string>
+    <string name="icon_certificates_description">Biểu tượng Chứng chỉ</string>
+    <string name="category_certificates">Chứng chỉ</string>
+    <string name="icon_language_description">Biểu tượng Ngôn ngữ</string>
+    <string name="category_language">Ngôn ngữ</string>
+
+    <string name="recommended_roadmap">Lộ trình được đề xuất</string>
+    <string name="see_more">Xem thêm</string>
+    <string name="start_journey_button">Bắt đầu hành trình</string>
+
+    <string name="course_ui_ux_title">Làm chủ Thiết kế UI/UX</string>
+    <string name="course_ui_ux_details">12 Lớp, 3 Cấp độ</string>
+    <string name="course_html_title">Làm chủ HTML</string>
+    <string name="course_html_details">14 Lớp, 3 Cấp độ</string>
+
+    <string name="freemium_classes">Các lớp Miễn phí</string>
+    <string name="star_icon_description">Đánh giá sao</string>
+    <string name="course_digital_marketing_title">Digital Marketing cho người mới</string>
+    <string name="course_free_label">Miễn phí</string>
+    <string name="course_digital_marketing_rating">(1,125)</string>
+    <string name="course_english_freelancer_title">Tiếng Anh cho Freelancer: Phỏng vấn &amp; công việc...</string>
+    <string name="course_english_freelancer_rating">(1,200)</string>
+
+    <string name="popular_classes">Các lớp Phổ biến</string>
+    <string name="course_copywriter_title">Trở thành Copywriter</string>
+    <string name="course_copywriter_price">70,000 VNĐ</string>
+    <string name="course_copywriter_rating">(780)</string>
+
+    <string name="nav_home_icon_description">Biểu tượng Trang chủ</string>
+    <string name="nav_home">Trang chủ</string>
+    <string name="nav_events_icon_description">Biểu tượng Sự kiện</string>
+    <string name="nav_events">Sự kiện</string>
+    <string name="nav_class_icon_description">Biểu tượng Lớp</string>
+    <string name="nav_class">Lớp</string>
+    <string name="nav_profile_icon_description">Biểu tượng Hồ sơ</string>
+    <string name="nav_profile">Hồ sơ</string>
+
+    <string name="my_classes_title">Lớp học của bạn</string>
+    <string name="beginner_level">Cơ bản</string>
+    <string name="progress_5_of_10">5/10</string>
+    <string name="progress_50_percent">50%</string>
+
+    <string name="ai_tutor_title">Gia sư AI (Câu hỏi Thực hành)</string>
+    <string name="ai_tutor_context_placeholder">Xem trước Nội dung bài học...</string>
+    <string name="create_mcq_button">Tạo Câu hỏi Trắc nghiệm</string>
+    <string name="create_open_ended_button">Tạo Câu hỏi Mở</string>
+    <string name="ai_tutor_result_placeholder">Các câu hỏi do AI tạo sẽ xuất hiện tại đây sau khi bạn nhấn nút.</string>
+
+    <string-array name="filter_options">
+        <item>Lọc</item>
+        <item>Mới nhất</item>
+        <item>Phổ biến</item>
+    </string-array>
+
+    <string-array name="education_levels">
+        <item>Lớp 10</item>
+        <item>Lớp 11</item>
+        <item>Lớp 12</item>
+        <item>Đại học năm 1</item>
+        <item>Đại học năm 2</item>
+        <item>Đại học năm 3</item>
+        <item>Đại học năm 4</item>
+    </string-array>
+
+    <string-array name="age_range">
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+    </string-array>
+</resources>
