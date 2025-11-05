@@ -1,5 +1,6 @@
 package vn.edu.tlu.cse.ht1.lequocthinh.kdtm
 
+import android.content.Intent // <-- THÊM 1
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -11,10 +12,9 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import de.hdodenhof.circleimageview.CircleImageView
+import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.MainActivity // <-- THÊM 2
 
-// -----------------------------------------------------------------
-// SỬA 1: KẾ THỪA TỪ BaseActivity()
-// -----------------------------------------------------------------
+// Kế thừa từ BaseActivity()
 class ProfileActivity : BaseActivity() {
 
     private lateinit var profileImage: CircleImageView
@@ -22,7 +22,7 @@ class ProfileActivity : BaseActivity() {
     private lateinit var tvEmail: TextView
     private lateinit var tvPhone: TextView
     private lateinit var btnLogout: Button
-    private lateinit var progressBar: ProgressBar // Đảm bảo ID là "profileLoading" trong XML
+    private lateinit var progressBar: ProgressBar
 
     private lateinit var auth: FirebaseAuth
     private lateinit var database: FirebaseDatabase
@@ -36,7 +36,7 @@ class ProfileActivity : BaseActivity() {
         tvEmail = findViewById(R.id.tvEmail)
         tvPhone = findViewById(R.id.tvPhone)
         btnLogout = findViewById(R.id.btnLogout)
-        progressBar = findViewById(R.id.profileLoading) // Sửa ID này nếu bạn đặt tên khác
+        progressBar = findViewById(R.id.profileLoading)
         profileImage = findViewById(R.id.profile_image)
 
         // Khởi tạo Firebase
@@ -46,19 +46,28 @@ class ProfileActivity : BaseActivity() {
         // Tải thông tin người dùng
         loadUserProfile()
 
-        // Xử lý đăng xuất
+        // -----------------------------------------------------------------
+        // SỬA 3: HOÀN THIỆN LOGIC ĐĂNG XUẤT
+        // -----------------------------------------------------------------
         btnLogout.setOnClickListener {
+            // 1. Đăng xuất khỏi Firebase Auth
             auth.signOut()
-            // Chuyển về màn hình Login (ví dụ)
-            // val intent = Intent(this, LoginActivity::class.java)
-            // intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            // startActivity(intent)
-            // finish()
+
+            // 2. Tạo Intent để quay về MainActivity (màn hình chính/login)
+            val intent = Intent(this, MainActivity::class.java)
+
+            // 3. Xóa hết các Activity cũ (như Home, Profile...) khỏi bộ nhớ
+            // Để người dùng không thể nhấn "Back" quay lại sau khi đăng xuất
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+            // 4. Khởi chạy
+            startActivity(intent)
+
+            // 5. Đóng Activity hiện tại (ProfileActivity)
+            finish()
         }
 
-        // -----------------------------------------------------------------
-        // SỬA 2: GỌI HÀM TỪ LỚP CHA VÀ TRUYỀN ID
-        // -----------------------------------------------------------------
+        // Gọi hàm từ lớp cha và truyền ID
         setupBottomNavigation(R.id.nav_profile)
     }
 
@@ -86,10 +95,7 @@ class ProfileActivity : BaseActivity() {
                         tvPhone.visibility = View.GONE
                     }
 
-                    // Code để tải ảnh profile dùng Glide/Picasso (nếu có)
-                    // if (imageUrl != null && imageUrl.isNotEmpty()) {
-                    //    Glide.with(this@ProfileActivity).load(imageUrl).into(profileImage)
-                    // }
+                    // (Code Glide/Picasso)
 
                     progressBar.visibility = View.GONE
                 }
