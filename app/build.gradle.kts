@@ -96,9 +96,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
-
-// --- ĐÂY LÀ ĐOẠN CODE ĐÃ SỬA ---
-// Hiển thị chi tiết các API/hàm đã lỗi thời (deprecated) khi build
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions {
         jvmTarget = "11"

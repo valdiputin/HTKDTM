@@ -12,7 +12,20 @@
           "package_name": "vn.edu.tlu.cse.ht1.lequocthinh.kdtm"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1014852112031-749q4ne5cte7k6rjd2113g0cfef47on2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "vn.edu.tlu.cse.ht1.lequocthinh.kdtm",
+            "certificate_hash": "1b650a492f74a4e96cf1b8267ac3250f81a8dea6"
+          }
+        },
+        {
+          "client_id": "1014852112031-3r80km5mimsvb13tqcbus9b206vdu9r5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDEmonp1LzVkGXv14pwVIF4wbk_WC_zHuw"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1014852112031-3r80km5mimsvb13tqcbus9b206vdu9r5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
