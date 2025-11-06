@@ -22,6 +22,7 @@ import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.adapter.CourseAdapter
 import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.model.Course
 import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.service.CourseRecommendationService
 import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.service.FirebaseService
+import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.service.LeaderboardActivity
 
 class HomeActivity : BaseActivity() {
 
@@ -103,7 +104,7 @@ class HomeActivity : BaseActivity() {
         // Nút 1: Các Lớp Học
         val classesCategory: LinearLayout? = findViewById(R.id.category_classes)
         classesCategory?.setOnClickListener {
-            val intent = Intent(this, ClassingActivity::class.java)
+            val intent = Intent(this, LeaderboardActivity::class.java)
             startActivity(intent)
         }
 
