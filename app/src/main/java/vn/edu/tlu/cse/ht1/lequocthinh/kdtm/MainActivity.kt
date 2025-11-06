@@ -22,6 +22,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import vn.edu.tlu.cse.ht1.lequocthinh.kdtm.service.FirebaseService
 import java.util.Locale
 
@@ -108,10 +109,15 @@ class MainActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             val result = FirebaseService.login(email, password)
             result.onSuccess {
-                Toast.makeText(this@MainActivity, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, "Đăng nhập thành công!", Toast.LENGTH_SHORT)
+                    .show()
                 navigateToHome()
             }.onFailure { exception ->
-                Toast.makeText(this@MainActivity, "Đăng nhập thất bại: ${exception.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this@MainActivity,
+                    "Đăng nhập thất bại: ${exception.message}",
+                    Toast.LENGTH_LONG
+                ).show()
                 btnLogin.isEnabled = true
             }
         }
